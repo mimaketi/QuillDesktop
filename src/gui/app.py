@@ -6,9 +6,10 @@ import os
 import gtk
 import pango
 import gtk.glade
-from main import MainWindow
+
 from about import AboutDialog
-from log import Logger
+from page_widget import PageWidget
+
 
 class Application:
     """
@@ -21,22 +22,62 @@ class Application:
         builder = gtk.Builder()
         builder.add_from_file(gladefile)
         self.window = builder.get_object('main')
-        self.text   = builder.get_object('main-text')
-        self.about  = builder.get_object('about')
-        self.button = builder.get_object('button')
+        self.viewer = builder.get_object('main-page_viewer')
         self.status = builder.get_object('main-statusbar')
+        self.dlg_about = builder.get_object('about')
+        self.dlg_open  = builder.get_object('filechooser-open')
+        self.dlg_save  = builder.get_object('filechooser-save')
         builder.connect_signals(self)
         self.window.show()
+
+    def log(self, msg):
+        print 'Log:', msg
+
+    def set_status(self, msg, context='default'):
+        context = self.status.get_context_id(context)
+        self.status.pop(context)
+        self.status.push(context, msg)
 
     def on_main_destroy(self, widget, data=None):
         gtk.main_quit()
      
     def on_menuitem_about_activate(self, widget, data=None):
-        self.about.show()
-
-    def on_about_destroy(self, widget, data=None):
-        self.about.hide()
+        self.dlg_about.run()
 
     def on_about_response(self, widget, data=None):
-        self.about.hide()
+        self.dlg_about.hide()
+
+    def on_menuitem_manual_activate(self, widget, data=None):
+        print 'See manual'
+
+    def on_menuitem_open_activate(self, widget, data=None):
+        self.dlg_open.run()
+
+    def on_menuitem_save_activate(self, widget, data=None):
+        self.dlg_save.run()
+
+    def on_toolbutton_open_clicked(self, widget, data=None):
+        self.dlg_open.run()
+
+    def on_toolbutton_save_clicked(self, widget, data=None):
+        self.dlg_save.run()
+
+    def on_toolbutton_prev_clicked(self, widget, data=None):
+        print 'Previous page'
+
+    def on_toolbutton_next_clicked(self, widget, data=None):
+        print 'Next page'
+
+    def on_filechooser_open_response(self, widget, data=None):
+        print 'open response', widget, data
+        self.set_status('open')
+        self.dlg_open.hide()
+
+    def on_filechooser_save_response(self, widget, data=None):
+        print 'save response', widget, data
+        self.set_status('save')
+        self.dlg_save.hide()
+
+
+    
 

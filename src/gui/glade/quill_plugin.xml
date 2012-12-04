@@ -1,0 +1,20 @@
+<glade-catalog 
+    name="quill_plugin" 
+    library="gladepython" 
+    domain="glade-3" 
+    depends="gtk+">
+
+  <init-function>glade_python_init</init-function>
+
+  <glade-widget-classes>
+    <glade-widget-class 
+	title="Page Viewer" 
+	name="PageWidget"
+	generic-name="page_widget"/>
+  </glade-widget-classes>
+
+  <glade-widget-group name="python" title="Quill Widgets">
+    <glade-widget-class-ref name="PageWidget"/>
+  </glade-widget-group>
+
+</glade-catalog>
