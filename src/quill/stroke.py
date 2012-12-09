@@ -1,5 +1,5 @@
 """
-A pen stroke
+Pen Stroke
 """
 
 

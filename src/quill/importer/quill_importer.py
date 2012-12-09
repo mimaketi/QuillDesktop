@@ -1,5 +1,5 @@
 """
-Importer for Quill archive files
+Importer for Quill Archives
 """
 
 import tarfile

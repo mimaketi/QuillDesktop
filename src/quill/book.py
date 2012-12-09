@@ -1,6 +1,8 @@
 """
 A Single Notebook
 
+The :class:`book` class stores metadata and the list of pages.
+
 EXAMPLES::
         
     >>> sample_book   # doctest: +ELLIPSIS

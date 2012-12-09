@@ -4,3 +4,4 @@
 \#*\#
 bin/python
 *.quill
+doc/_*
