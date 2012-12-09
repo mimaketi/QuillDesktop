@@ -1,5 +1,13 @@
 """
-A single notebook
+A Single Notebook
+
+EXAMPLES::
+        
+    >>> sample_book   # doctest: +ELLIPSIS
+    Book title: Example Notebook
+    Uuid: 1fd6a485-33ed-4a45-a5a1-e06e55fdca57
+    Created ...
+    Last modified ...
 """
 
 from datetime import datetime
@@ -9,33 +17,108 @@ from quill.decorators import cached_method
 
 
 class Book(object):
+    """
+    Metadata for a notebook
 
-    def __init__(self, importer):
-        self._importer = importer
+    EXAMPLES::
+        
+        >>> type(sample_book)
+        <class 'quill.book.Book'>
+    """
 
-    @cached_method
+    def __init__(self, title, uuid, mtime, ctime, pages):
+        """
+        The Python constructor.
+
+        This is not meant to be called by hand, but instead from the
+        :meth:`~quill.importer.base.get_book` method.
+
+        :param string title: title of the notebook
+        :param string uuid: uuid of the notebook
+        :param integer mtime: last modification time in milliseconds
+        :param integer ctime: creation time in milliseconds 
+        :param list pages: pages, either a list or an object
+                           implementing `__len__` and `__getitem__`.
+        """
+        self._title = title
+        self._uuid = uuid
+        self._mtime_millis = mtime
+        self._ctime_millis = ctime
+        self._pages = pages
+
     def uuid(self):
-        return self._importer.uuid()
+        """
+        Return the UUID of the notebook.
 
-    @cached_method
+        :rtype: string
+
+        EXAMPLES::
+        
+            >>> sample_book.uuid()
+            '1fd6a485-33ed-4a45-a5a1-e06e55fdca57'
+        """
+        return self._uuid
+
     def title(self):
-        return self._importer.title()
+        """
+        Return the title of the notebook.
 
-    @cached_method
+        :rtype: string
+
+        EXAMPLES::
+        
+            >>> sample_book.title()
+            'Example Notebook'
+        """
+        return self._title
+
     def mtime_millis(self):
-        return self._importer.mtime_millis()
+        """
+        Return the last modification time of the notebook in milliseconds.
 
-    @cached_method
+        :rtype: integer
+
+        EXAMPLES::
+        
+            >>> sample_book.mtime_millis()
+            1355065045000
+        """
+        return self._mtime_millis
+
     def ctime_millis(self):
-        return self._importer.mtime_millis()
+        """
+        Return the creation time of the notebook in milliseconds.
 
-    @cached_method
+        :rtype: integer
+
+        EXAMPLES::
+        
+            >>> sample_book.ctime_millis()
+            1355064642000
+        """
+        return self._ctime_millis
+
     def mtime(self):
+        """
+        Return the last modification time of the notebook.
+
+        EXAMPLES::
+        
+            >>> sample_book.mtime()
+            datetime.datetime(2012, 12, 9, 14, 57, 25)
+        """
         sec = self.mtime_millis() / 1000.0
         return datetime.fromtimestamp(sec)
 
-    @cached_method
     def ctime(self):
+        """
+        Return the creation time of the notebook.
+
+        EXAMPLES::
+        
+            >>> sample_book.ctime()
+            datetime.datetime(2012, 12, 9, 14, 57, 25)
+        """
         sec = self.mtime_millis() / 1000.0
         return datetime.fromtimestamp(sec)
 
@@ -84,15 +167,17 @@ class Book(object):
         """
         Return the number of pages.
         """
-        return self._importer.n_pages()
-
-    __len__ = n_pages
+        return len(self._pages)
 
     def get_page(self, n):
         """
         Return the n-th page.
         """
-        return self._importer.get_page(n)
+        return self.pages[n]
+
+    __len__ = n_pages
+
+    __getitem__ = get_page
 
     def __iter__(self):
         for i in range(self.n_pages):
@@ -103,6 +188,6 @@ class Book(object):
         s += 'Uuid: '+self.uuid()+'\n'
         s += 'Created '+self.pretty_ctime()+'\n'
         s += 'Last modified '+self.pretty_ctime()+'\n'
-        return s
+        return s.strip()
 
 

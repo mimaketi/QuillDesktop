@@ -146,7 +146,6 @@ class QuillImporter(ImporterBase):
         if len(index_files) != 1:
             raise QuillImporterError('Not a Quill file')
         self._index = q = QuillIndex(index_files[0])
-        print q
         notebook_dir = os.path.split(index_files[0].name)[0]
         self._pages = []
         for page_uuid in q.page_uuids:
