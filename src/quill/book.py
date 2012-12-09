@@ -175,7 +175,9 @@ class Book(object):
         """
         Return the n-th page.
         """
-        return self.pages[n]
+        page = self._pages[n]
+        page._place_in_book(self)
+        return page
 
     __len__ = n_pages
 
@@ -192,4 +194,11 @@ class Book(object):
         s += 'Last modified '+self.pretty_ctime()+'\n'
         return s.strip()
 
+    def save(self, exporter):
+        """
+        Save the book using the exporter.
+        """
+        for i in range(self.n_pages()):
+            page = self.get_page(i)
+            exporter.page(page)
 

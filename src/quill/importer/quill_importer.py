@@ -6,6 +6,7 @@ import tarfile
 import struct
 import os
 
+
 from base import ImporterBase, QuillImporterError
 
 
@@ -18,17 +19,21 @@ class QuillPage(object):
         self.page_number = page_number
         fp = self.fp = page_file
         self.version = struct.unpack(">i", fp.read(4))
+        if self.version != (6,):
+            raise QuillImporterError('wrong page version')
         nbytes = struct.unpack(">h", fp.read(2))
-        self.u = fp.read(36)
+        self.uuid = fp.read(36)
         self.tsversion = struct.unpack(">i", fp.read(4))
-        
+        if self.tsversion != (1,):
+            raise QuillImporterError('wrong tag set version')
         self.ntags = struct.unpack(">i", fp.read(4))
         
         # If we have tags
         self.tags = []
         for x in xrange(self.ntags[0]):
             self.tversion = struct.unpack(">i", fp.read(4))
-            assert self.tversion[0] == 1
+            if self.tversion != (1,):
+                raise QuillImporterError('wrong tag version')
             nbytes = struct.unpack(">h", fp.read(2))
             tag = {}
             tag["tag"] = fp.read(nbytes[0]).decode("utf-8")
@@ -42,13 +47,57 @@ class QuillPage(object):
         
         self.paper_type = struct.unpack(">i", fp.read(4))
         self.nimages = struct.unpack(">i", fp.read(4))
+        self.images = [ self.read_image() for i in xrange(self.nimages[0]) ]
         dummy = struct.unpack(">i", fp.read(4))
+        if dummy != (0,):
+            raise QuillImporterError('out of sync')
         self.read_only = struct.unpack(">?", fp.read(1))
         self.aspect_ratio = struct.unpack(">f", fp.read(4))[0]
         self.nstrokes = struct.unpack(">i", fp.read(4))
+        self.strokes = [ self.read_stroke() for i in xrange(self.nstrokes[0]) ]
+        self.nlines = struct.unpack(">i", fp.read(4))
+        # dummy = struct.unpack(">i", fp.read(4))
+        # self.ntext = struct.unpack(">i", fp.read(4))
+        
+    def read_image(self):
+        fp = self.fp
+        version = struct.unpack(">i", fp.read(4))
+        if version != (1,):
+            raise QuillImporterError('wrong image version')
+        uuid_nbytes = struct.unpack(">h", fp.read(2))
+        uuid = fp.read(36)
+        top_left = struct.unpack(">f", fp.read(4))
+        top_right = struct.unpack(">f", fp.read(4))
+        bottom_left = struct.unpack(">f", fp.read(4))
+        bottom_right = struct.unpack(">f", fp.read(4))
+        constrain_aspect = struct.unpack(">?", fp.read(1))
+        from quill.image import Image
+        return Image(uuid, 
+                     top_left[0], top_right[0], bottom_left[0], bottom_right[0], 
+                     constrain_aspect[0])
 
-        self.height = 1100
-        self.width = self.height * self.aspect_ratio
+    def read_stroke(self):
+        fp = self.fp
+        version = struct.unpack(">i", fp.read(4))
+        if version != (2,):
+            raise QuillImporterError('wrong stroke version')
+        pen_color = struct.unpack(">i", fp.read(4))
+        red = (pen_color[0] >> 16) & 0xFF
+        green = (pen_color[0] >> 8) & 0xFF
+        blue = pen_color[0] & 0xFF
+        thickness = struct.unpack(">i", fp.read(4))
+        toolint = struct.unpack(">i", fp.read(4))
+        fountain_pen = (toolint == (0,))
+        N = struct.unpack(">i", fp.read(4))
+        points = []
+        for i in xrange(N[0]):
+            x = struct.unpack(">f", fp.read(4))
+            y = struct.unpack(">f", fp.read(4))
+            p = struct.unpack(">f", fp.read(4))
+            points.append((x[0], y[0], p[0]))
+        from quill.stroke import Stroke
+        return Stroke(fountain_pen, red, green, blue, points)
+
 
     def _draw(self, cairo_context):
         cr = cairo_context
@@ -105,19 +154,17 @@ class QuillIndex(object):
     def __init__(self, index_file):
         fp = index_file
         self.version = struct.unpack(">i", fp.read(4))
+        if self.version != (4,):
+            raise QuillImporterError('wrong page version')
         self.npages = struct.unpack(">i", fp.read(4))
-        
         self.page_uuids = []
         for x in xrange(self.npages[0]):
             nbytes = struct.unpack(">h", fp.read(2))
             u = fp.read(36)
             self.page_uuids.append(u)
-        
         self.currentPage = struct.unpack(">i", fp.read(4))
-        
         nbytes = struct.unpack(">h", fp.read(2))
         self.title = fp.read(nbytes[0])
-        
         self.ctime = struct.unpack(">q", fp.read(8))
         self.mtime = struct.unpack(">q", fp.read(8))
         nbytes = struct.unpack(">h", fp.read(2))
@@ -137,7 +184,8 @@ class QuillIndex(object):
 class QuillImporter(ImporterBase):
     
     def __init__(self, quill_filename):
-        with tarfile.open(quill_filename, "r") as t:
+        self._filename = quill_filename
+        with tarfile.open(self._filename, "r") as t:
             self._open_quill_archive(t)
 
     def _open_quill_archive(self, t):
@@ -147,11 +195,8 @@ class QuillImporter(ImporterBase):
             raise QuillImporterError('Not a Quill file')
         self._index = q = QuillIndex(index_files[0])
         notebook_dir = os.path.split(index_files[0].name)[0]
-        self._pages = []
-        for page_uuid in q.page_uuids:
-            page_file = t.extractfile(notebook_dir+'/page_'+page_uuid+'.quill_data')
-            self._pages.append(page_file)
-        
+        self._page_filenames = [notebook_dir+'/page_'+page_uuid+'.quill_data'
+                                for page_uuid in q.page_uuids ]
 
     def uuid(self):
         return self._index.uuid
@@ -172,6 +217,9 @@ class QuillImporter(ImporterBase):
         """
         Return the n-th page.
         """
-        page_file = self._pages[n]
-        qp = QuillPage(page_file, page_number)
-        
+        page_filename = self._page_filenames[n]
+        with tarfile.open(self._filename, "r") as t:
+            page_file = t.extractfile(page_filename)
+            qp = QuillPage(page_file, n)
+        from quill.page import Page
+        return Page(n, qp.uuid, qp.aspect_ratio, qp.strokes, qp.images)

@@ -5,23 +5,33 @@ Base class for all exporters
 
 class ExporterBase(object):
 
-    def __init__(self, output_filename):
-        self
-
-    def title(self):
-        return self._title
-
-    def creation_time(self):
-        return self._ctime
-
-    def modification_time(self):
-        return self._mtime
-
-    def save(self, book):
+    def begin_export(self):
         """
-        Save 
+        Called at the beginning of the export process.
         """
-        raise NotImplemented
+        pass
 
+    def end_export(self):
+        """
+        Called at the beginning of the export process.
+        """
+        pass
+
+    ##################################################################
+    #
+    # Most radical way to implement your own exporter: override the
+    # book() method and do it all yourself.
+    #
+    ##################################################################
+
+    def book(self, book):
+        """
+        Export the notebook.
+
+        :param book: the notebook to export
+        """
+        self.begin_export()
+        book.save(self)
+        self.end_export()
 
     

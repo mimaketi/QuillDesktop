@@ -4,42 +4,59 @@
 Welcome to Quill View/Converter's documentation!
 ================================================
 
-Notebook Data Model
+Quill is an open-source handwriting note-taking app for Android
+tablets. This program lets you view ``.quill`` backup files on your
+desktop, and/or convert them to different formats. 
+
+* Google play market: https://market.android.com/details?id=com.write.Quill
+* Google code project page: http://code.google.com/p/android-quill/
+
+
+Use as a GUI Viewer
 -------------------
 
-The data is abstracted away from any particular file
-presentation. Importers and exporters (see below) convert other file
-formats into/from the data model.
+This program is as PyGTK application, so it will run on pretty much
+any platform if you have GTK, PyGTK, and PyCairo installed. Use the
+``--gui`` switch to show the graphical user interface.
+
+EXAMPLES::
+
+    [user@localhost]$ quill --gui
+
+
+Use as a Command-Line Converter
+-------------------------------
+
+If you specify input and output filename then the 
+
+EXAMPLES::
+
+    [user@localhost]$ quill file.quill file.pdf
+
+
+Programmers Guide
+-----------------
+
+Want to add support for your favorite file format? Head over to the
+:ref:`code` and find out how!
+
+
+Authors
+-------
+
+* Volker Braun
+* Nicholas A. Knouf (http://zeitkunst.org)
+
+
+License
+-------
+
+GPL v3
+
+
+Table of Contents
+-----------------
 
 .. toctree::
-   :maxdepth: 2
 
-   quill.book
-   quill.page
-   quill.stroke
-   quill.image
-
-
-Importing Files
-===============
-
-.. toctree::
-   :maxdepth: 2
-
-   quill.importer.base
-   quill.importer.quill_importer
-
-
-
-Exporting Files
-===============
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+    code

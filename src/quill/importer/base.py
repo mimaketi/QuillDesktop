@@ -137,9 +137,17 @@ class ImporterBase(object):
         import datetime
         return self._time_to_millis(datetime.now())
 
-    __len__ = n_pages
+    def __len__(self):
+        """
+        Implement the list interface for the pages
+        """
+        return self.n_pages()
 
-    __getitem__ = get_page
+    def __getitem__(self, n):
+        """
+        Implement the list interface for the pages
+        """
+        return self.get_page(n)
 
     def get_book(self):
         """

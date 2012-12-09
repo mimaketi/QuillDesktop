@@ -5,56 +5,30 @@ import sys
 
 sys.path.append('src')
 
-try:
-    import os
-    from pyinotify import WatchManager, Notifier, ThreadedNotifier, EventsCodes, ProcessEvent
-    HAVE_PY_INOTIFY = True
-except ImportError:
-    HAVE_PY_INOTIFY = False
 
 
-
-
-def inotify_watch():
-
-    class PTmp(ProcessEvent):
-        def process_IN_CLOSE_WRITE(self, event):
-            print "Wrote: %s" %  os.path.join(event.path, event.name)
-            run()
-
-    wm = WatchManager()
-    mask = EventsCodes.ALL_FLAGS['IN_CLOSE_WRITE']
-    wdd = wm.add_watch('src', mask, rec=True)
-    notifier = Notifier(wm, PTmp())
-    while True:
-        try:
-            notifier.process_events()
-            if notifier.check_events():
-                notifier.read_events()
-        except KeyboardInterrupt:
-            notifier.stop()
-            break
-
-
-import quill.importer.base
-import quill.book
-
-def run():
+def run_doctests():
     from quill.importer.quill_importer import QuillImporter
     infile = 'test/Example_Notebook.quill'
     imp = QuillImporter(infile)
     book = imp.get_book()
-    reload(quill.importer.base)
+    page = book.get_page(0)
+    import quill.importer.base
     doctest.testmod(quill.importer.base, globs={'sample_importer': imp})
-    reload(quill.book)
+    import quill.book
     doctest.testmod(quill.book, globs={'sample_book': book})
-    
+    import quill.page
+    doctest.testmod(quill.page, globs={'sample_page': page})
+    import quill.graphics_object
+    doctest.testmod(quill.graphics_object, globs={'sample_stroke': page.strokes()[0]})
+    import quill.stroke
+    doctest.testmod(quill.stroke, globs={'sample_stroke': page.strokes()[0]})
+    import quill.image
+    doctest.testmod(quill.image, globs={'sample_image': page.images()[0]})
 
 
 if __name__ == '__main__':
-    inotify_watch()
-
-    #$run()
+    run_doctests()
 
 
 
