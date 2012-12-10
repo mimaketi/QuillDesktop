@@ -1,37 +1,25 @@
-Quill Converter
-===============
+Welcome to Quill Desktop's documentation!
+=========================================
 
-A program to view and convert Quill files
-(https://code.google.com/p/android-quill/).
+Quill is an open-source handwriting note-taking app for Android
+tablets. This program is a desktop companion for it. It lets you view
+``.quill`` backup files without your Android device, and/or convert
+them to different formats.
 
+Extended documentation is at http://vbraun.github.com/QuillDesktop
 
-Usage
-=====
+If you are looking for Quill the Android app:
 
-run.py -f FILENAME
-
-This is take a given Quill file (with .quill extension), create a new
-directory based on the name of the notebook, and generate a set of
-SVGs for each page. Converting this into a PDF can then be done with a
-separate program.
-
-
-Caveats
-=======
-
-The GUI requires the Python GTK, cairo, and glade bindings to be
-installed. Export to PDF/SVG requires cairo. Import/export of other
-file formats only needs Python.
-
-This was done quickly and does not have as much error checking as there should be.
-
-The script doesn't currently deal with earlier Quill formats.
-
-The script doesn't deal with line art.
+* Google play market: https://market.android.com/details?id=com.write.Quill
+* Google code project page: http://code.google.com/p/android-quill/
 
 
 TODO
-====
+----
+
+* The script doesn't currently deal with earlier Quill formats.
+
+* The script doesn't deal with line art.
 
 * Better error handling
 
@@ -47,13 +35,14 @@ TODO
 
 
 Authors
-=======
+-------
 
-* Nicholas A. Knouf (http://zeitkunst.org)
-* Volker Braun
+* Volker Braun: Framework, GUI, more export file formats.
+* Nicholas A. Knouf (http://zeitkunst.org): Initial quill to SVG
+  converter.
 
 
 License
-=======
+-------
 
 GPL v3
