@@ -16,6 +16,20 @@ class CairoSurfacePaginated(CairoContext):
         cr = cairo.Context(self._surface)
         super(CairoSurfacePaginated, self).__init__(cr, 0,0)
 
+    def is_multipage(self):
+        """
+        Return whether the exporter can export multiple pages.
+
+        EXAMPLES::
+
+            >>> from quill.exporter.pdf import Pdf
+            >>> from tempfile import TemporaryFile
+            >>> tmp = TemporaryFile(suffix='pdf')
+            >>> Pdf(tmp).is_multipage()
+            True
+        """
+        return True
+
     def begin_export(self):
         self._first_page = True
         super(CairoSurfacePaginated, self).begin_export()

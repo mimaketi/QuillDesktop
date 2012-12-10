@@ -9,6 +9,25 @@ class QuillExporterError(Exception):
 
 class ExporterBase(object):
 
+    def is_multipage(self):
+        """
+        Return whether the exporter can export multiple pages.
+
+        SVG or image export can only export a single page, while pdf
+        or postscript allow multiple pages. This method returns
+        whether the backend allows multiple pages. You should override
+        this method to return ``True`` if your backend supports
+        multiple pages.
+
+        EXAMPLES::
+
+            >>> from quill.exporter.base import ExporterBase
+            >>> exporter = ExporterBase()
+            >>> exporter.is_multipage()
+            False
+        """
+        return False
+
     def set_page_numbers(self, numbers=None):
         """
         Set the page numbers to export.

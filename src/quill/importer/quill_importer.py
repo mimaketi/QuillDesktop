@@ -7,7 +7,7 @@ import struct
 import os
 
 
-from base import ImporterBase, QuillImporterError
+from quill.importer.base import ImporterBase, QuillImporterError
 
 
 class QuillPage(object):

@@ -11,25 +11,30 @@ from about import AboutDialog
 from page_widget import PageWidget
 
 
+from quill.importer.autodetect import autodetect_importer
+from quill.exporter.autodetect import autodetect_exporter
+
+
 class Application:
     """
     The Quill convert app window
     """
     
     def __init__(self, app_home_dir, filename=None):
-        self.home_dir = app_home_dir
-        gladefile = os.path.join(self.home_dir, 'res', 'QuillDesktop.xml')
+        self._home_dir = app_home_dir
+        gladefile = os.path.join(self._home_dir, 'res', 'QuillDesktop.xml')
         builder = gtk.Builder()
         builder.add_from_file(gladefile)
         self.window = builder.get_object('main')
         self.viewer = builder.get_object('main-page_viewer')
-        if filename is not None:
-            self.viewer.set_file(filename)
         self.status = builder.get_object('main-statusbar')
         self.dlg_about = builder.get_object('about')
         self.dlg_open  = builder.get_object('filechooser-open')
         self.dlg_save  = builder.get_object('filechooser-save')
         builder.connect_signals(self)
+        self._book = None
+        if filename is not None:
+            self.open_file(filename)
         self.window.show()
 
     def log(self, msg):
@@ -71,22 +76,33 @@ class Application:
         self.viewer.next_page()
 
     def on_filechooser_open_response(self, widget, data=None):
-        print 'open response', widget, data
         self.set_status('open')
         self.dlg_open.hide()
         if data==0:
             filename = widget.get_filename()
-            print filename
-            self.viewer.set_file(filename)
+            self.open_file(filename)
 
     def on_filechooser_save_response(self, widget, data=None):
-        print 'save response', widget, data
         self.set_status('save')
         self.dlg_save.hide()
         if data==0:
             filename = widget.get_filename()
-            print filename
+            self.save_file(filename)
+            
+    def open_file(self, filename):
+        self._file = filename
+        imp = autodetect_importer(self._file)
+        book = self._book = imp.get_book()
+        self.viewer.set_book(book)
+        self.set_status('Opened '+filename)
 
-
+    def save_file(self, filename):
+        exp = autodetect_exporter(filename)
+        if not exp.is_multipage():
+            exp.set_page_numbers(self.viewer.page_number())
+        exp.book(self._book)
+        self.set_status('Saved '+filename)
+        
     
+
 
