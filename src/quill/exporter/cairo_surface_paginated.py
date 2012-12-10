@@ -2,16 +2,19 @@
 Draw to a Cairo surface with a paginated backend
 """
 
+import cairo
 
-from quill.exporter.cairo_surface import CairoSurface
+from quill.exporter.cairo_context import CairoContext
 
 
-class CairoSurfacePaginated(CairoSurface):
+class CairoSurfacePaginated(CairoContext):
 
     def __init__(self, surface):
         self._paper_height = 842.0   # A4 paper height in points
         self._paper_width  = 595.0   # A4 paper width in points
-        super(CairoSurfacePaginated, self).__init__(surface, 0,0)
+        self._surface = surface
+        cr = cairo.Context(self._surface)
+        super(CairoSurfacePaginated, self).__init__(cr, 0,0)
 
     def begin_export(self):
         self._first_page = True

@@ -23,6 +23,8 @@ class Application:
         builder.add_from_file(gladefile)
         self.window = builder.get_object('main')
         self.viewer = builder.get_object('main-page_viewer')
+        if filename is not None:
+            self.viewer.set_file(filename)
         self.status = builder.get_object('main-statusbar')
         self.dlg_about = builder.get_object('about')
         self.dlg_open  = builder.get_object('filechooser-open')
@@ -63,20 +65,27 @@ class Application:
         self.dlg_save.run()
 
     def on_toolbutton_prev_clicked(self, widget, data=None):
-        print 'Previous page'
+        self.viewer.prev_page()
 
     def on_toolbutton_next_clicked(self, widget, data=None):
-        print 'Next page'
+        self.viewer.next_page()
 
     def on_filechooser_open_response(self, widget, data=None):
         print 'open response', widget, data
         self.set_status('open')
         self.dlg_open.hide()
+        if data==0:
+            filename = widget.get_filename()
+            print filename
+            self.viewer.set_file(filename)
 
     def on_filechooser_save_response(self, widget, data=None):
         print 'save response', widget, data
         self.set_status('save')
         self.dlg_save.hide()
+        if data==0:
+            filename = widget.get_filename()
+            print filename
 
 
     

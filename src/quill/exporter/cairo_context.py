@@ -1,5 +1,5 @@
 """
-Draw to a Cairo surface
+Draw to a Cairo context
 """
 
 import cairo
@@ -9,24 +9,54 @@ from quill.exporter.base2 import ExporterBase2
 
 
 
-class CairoSurface(ExporterBase2):
+class CairoContext(ExporterBase2):
     
-    def __init__(self, surface, width, height):
+    def __init__(self, context, width, height, background=False):
         self._width = width
         self._height = height
-        self._surface = surface
+        self._context = context
+        self._background = background
+
+    def title(self, title):
+        pass
+
+    def uuid(self, uuid):
+        pass
+
+    def creation_time(self, ctime, ctime_millis):
+        pass
+
+    def modification_time(self, mtime, mtime_millis):
+        pass
 
     def begin_export(self):
-        cr = self._context = cairo.Context(self._surface)
+        cr = self._context
         cr.set_line_cap(cairo.LINE_CAP_ROUND)
         cr.set_line_join(cairo.LINE_JOIN_ROUND)
 
     def end_export(self):
-        self._surface.flush()
+        pass
         
     def new_page(self, page):
+        h = self._height
+        w = h * page.aspect_ratio()
+        if w>self._width:
+            w = self._width
+            h = w / page.aspect_ratio()
         self._context.identity_matrix()
-        self._context.scale(self._height, self._height)
+        self._context.scale(h, h)
+        dx = (self._width-w) / h
+        dy = (self._height-h) / h
+        self._context.translate(dx/2, dy/2)
+        self.background(page)
+
+    def background(self, page):
+        if not self._background:
+            return
+        cr = self._context
+        cr.set_source_rgb(1, 1, 1) 
+        cr.rectangle(0, 0, page.aspect_ratio(), 1) 
+        cr.fill()
 
     _pen_scale_factor = float(1600.0)
 

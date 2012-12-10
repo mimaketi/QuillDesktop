@@ -15,10 +15,10 @@ EXAMPLES::
 
 import cairo
 
-from quill.exporter.cairo_surface import CairoSurface
+from quill.exporter.cairo_context import CairoContext
 
 
-class Svg(CairoSurface):
+class Svg(CairoContext):
     """
     Exporter to PDF
     
@@ -32,5 +32,6 @@ class Svg(CairoSurface):
         height = 842   # A4 paper height in points
         width  = 595
         surface = cairo.SVGSurface(fileobj, width, height)
-        super(Svg, self).__init__(surface, width, height)
+        context = cairo.Context(surface)
+        super(Svg, self).__init__(context, width, height)
 

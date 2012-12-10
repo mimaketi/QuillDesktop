@@ -5,6 +5,8 @@ The drawing area widget for the page
 import gtk
 import math
 
+from quill.importer.quill_importer import QuillImporter
+from quill.exporter.cairo_context import CairoContext
 
 class PageWidget(gtk.DrawingArea):
     __gtype_name__ = 'PageWidget'
@@ -12,6 +14,8 @@ class PageWidget(gtk.DrawingArea):
  
     def __init__(self):
         gtk.DrawingArea.__init__(self)
+        self._file = None
+        self._page = 0
   
     def do_expose_event(self, event):
         context = self.window.cairo_create()
@@ -19,16 +23,36 @@ class PageWidget(gtk.DrawingArea):
                           event.area.width, event.area.height)
         context.clip()
         self.draw(context, *self.window.get_size())
+
+    def set_file(self, filename):
+        self._file = filename
+        imp = QuillImporter(self._file)
+        self._book = imp.get_book()
+        self._page = 0
+        self.queue_draw()
   
+    def prev_page(self):
+        if self._page == 0:
+            return
+        self._page -= 1
+        self.queue_draw()
+            
+    def next_page(self):
+        if self._page+1 == self._book.n_pages():
+            return
+        self._page += 1
+        self.queue_draw()
+
     def draw(self, context, width, height):
-        context.set_source_rgb(0.5, 0.0, 0.0) 
+        context.set_source_rgb(0.8, 0.8, 0.8) 
         context.rectangle(0, 0, width, height) 
         context.fill()
-        context.set_source_rgb(1.0, 0.0, 0.0)
-        radius = min(width, height)
-        context.arc(width / 2.0, height / 2.0, 
-                    radius / 2.0 - 20, 0, 2 * math.pi)  
-        context.stroke()
+        if self._file is None:
+            return
+
+        output = CairoContext(context, width, height, background=True)
+        output.set_page_numbers(self._page)
+        output.book(self._book)
 
 
 def page_widget_get_type(x):

@@ -57,7 +57,6 @@
             <child>
               <object class="GtkButton" id="filechooser-open-cancel">
                 <property name="label">gtk-cancel</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -72,7 +71,6 @@
             <child>
               <object class="GtkButton" id="filechooser-open-ok">
                 <property name="label">gtk-open</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -98,7 +96,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">filechooser-open-cancel</action-widget>
+      <action-widget response="1">filechooser-open-cancel</action-widget>
       <action-widget response="0">filechooser-open-ok</action-widget>
     </action-widgets>
   </object>
@@ -124,7 +122,6 @@
             <child>
               <object class="GtkButton" id="filechooser-save-cancel">
                 <property name="label">gtk-cancel</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -139,7 +136,6 @@
             <child>
               <object class="GtkButton" id="filechooser-save-ok">
                 <property name="label">gtk-save</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -165,7 +161,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">filechooser-save-cancel</action-widget>
+      <action-widget response="1">filechooser-save-cancel</action-widget>
       <action-widget response="0">filechooser-save-ok</action-widget>
     </action-widgets>
   </object>
@@ -186,7 +182,6 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkMenuItem" id="menuitem_file">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_File</property>
@@ -198,7 +193,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="imagemenuitem_open">
                         <property name="label">gtk-open</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -209,7 +203,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="imagemenuitem_save">
                         <property name="label">gtk-save-as</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -220,7 +213,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="imagemenuitem_quit">
                         <property name="label">gtk-quit</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -234,7 +226,6 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="menuitem_help">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Help</property>
@@ -245,7 +236,6 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkMenuItem" id="menuitem_manual">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Manual</property>
@@ -256,7 +246,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_about">
                         <property name="label">gtk-about</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -281,7 +270,6 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkToolButton" id="toolbutton_open">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">toolbutton_open</property>
@@ -296,7 +284,6 @@
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_save">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">toolbutton_save</property>
@@ -311,7 +298,6 @@
             </child>
             <child>
               <object class="GtkSeparatorToolItem" id="toolbutton_sep1">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
               </object>
@@ -322,12 +308,12 @@
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_prev">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">toolbutton_prev</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-go-back</property>
+                <accelerator key="Page_Up" signal="clicked"/>
                 <signal name="clicked" handler="on_toolbutton_prev_clicked" swapped="no"/>
               </object>
               <packing>
@@ -337,12 +323,12 @@
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_next">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">toolbutton_next</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-go-forward</property>
+                <accelerator key="Page_Down" signal="clicked"/>
                 <signal name="clicked" handler="on_toolbutton_next_clicked" swapped="no"/>
               </object>
               <packing>

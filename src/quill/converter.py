@@ -27,11 +27,10 @@ class QuillConverter(object):
             from quill.exporter.pdf import Pdf
             return Pdf
         if f.endswith('.ps'):
-            from quill.exporter.pdf import Postscript
+            from quill.exporter.ps import Postscript
             return Postscript
         raise NotImplementedError('cannot export '+self._outfile)
     
-
     def run(self, page_number=None):
         imp = self._imp_class(self._infile)
         exp = self._exp_class(self._outfile)

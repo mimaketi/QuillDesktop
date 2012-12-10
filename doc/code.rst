@@ -66,8 +66,11 @@ to the original (imported) file.
 
    quill.exporter.base
    quill.exporter.base2
-   quill.exporter.cairo_surface
+   quill.exporter.cairo_context
+   quill.exporter.cairo_surface_paginated
+   quill.exporter.svg
    quill.exporter.pdf
+   quill.exporter.ps
 
 
 Indices and tables

@@ -27,12 +27,12 @@ except:
 
 
 app_home_dir = os.getcwd()
-print 'App home dir = '+app_home_dir
+#print 'App home dir = '+app_home_dir
 sys.path.append(os.path.join(app_home_dir, 'src'))
 
-def run_gui():
+def run_gui(filename=None):
     from quill.gui.app import Application
-    app = Application(app_home_dir)
+    app = Application(app_home_dir, filename)
     gtk.main()
 
 
@@ -54,9 +54,9 @@ if __name__ == '__main__':
     parser.add_argument('-p, --page', dest='page', action='store',
                         default=None, type=int,
                         help='page number to export (default: all pages)')
-    parser.add_argument('--gui', dest='gui', action='store',
-                        default=False, type=bool,
-                        help='start the gui (default: False)')
+    parser.add_argument('--gui', dest='gui', action='store_true',
+                        default=False, 
+                        help='start the gui')
     args = parser.parse_args()
     
     if args.input is not None and args.output is not None:
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         QuillConverter(args.input, args.output).run(args.page)
 
     if args.gui:
-        run_gui()
+        run_gui(args.input)
 
 
 
