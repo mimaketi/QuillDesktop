@@ -103,8 +103,8 @@ class Page(object):
 
             >>> len(sample_page.strokes())
             125
-            >>> sample_page.strokes()[0]   # doctest: +ELLIPSIS
-            <quill.stroke.Stroke object at 0x...>
+            >>> sample_page.strokes()[0]
+            pen stroke with 40 points
         """
         return self._strokes
 
@@ -125,11 +125,3 @@ class Page(object):
         s = 'page number '+str(self.number())
         return s
 
-    def save(self, exporter):
-        """
-        Save the page using the exporter
-        """
-        for image in self.images():
-            exporter.image(image)
-        for stroke in self.strokes():
-            exporter.stroke(stroke)

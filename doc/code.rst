@@ -65,6 +65,8 @@ to the original (imported) file.
    :maxdepth: 2
 
    quill.exporter.base
+   quill.exporter.base2
+   quill.exporter.cairo
 
 
 Indices and tables

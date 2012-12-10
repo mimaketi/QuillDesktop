@@ -4,7 +4,7 @@ Single Pen Stroke
 EXAMPLES::
 
     >>> sample_stroke  # doctest: +ELLIPSIS
-    <quill.stroke.Stroke object at 0x...>
+    pen stroke with 40 points
 """
 
 from graphics_object import GraphicsObject
@@ -20,6 +20,9 @@ class Stroke(GraphicsObject):
         self._green = green
         self._blue = blue
         self._points = tuple(points)
+
+    def __repr__(self):
+        return 'pen stroke with '+str(self.n_points())+' points'
         
     def has_pressure(self):
         """

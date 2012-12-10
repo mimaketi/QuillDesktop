@@ -26,6 +26,11 @@ def run_doctests():
     import quill.image
     doctest.testmod(quill.image, globs={'sample_image': page.images()[0]})
 
+    import quill.exporter.base
+    doctest.testmod(quill.exporter.base, globs={'sample_book': book})
+    import quill.exporter.base2
+    doctest.testmod(quill.exporter.base2, globs={'sample_book': book})
+
 
 if __name__ == '__main__':
     run_doctests()

@@ -194,11 +194,3 @@ class Book(object):
         s += 'Last modified '+self.pretty_ctime()+'\n'
         return s.strip()
 
-    def save(self, exporter):
-        """
-        Save the book using the exporter.
-        """
-        for i in range(self.n_pages()):
-            page = self.get_page(i)
-            exporter.page(page)
-

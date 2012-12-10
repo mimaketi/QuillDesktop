@@ -5,17 +5,58 @@ Base class for all exporters
 
 class ExporterBase(object):
 
-    def begin_export(self):
+    def set_page_numbers(self, numbers=None):
         """
-        Called at the beginning of the export process.
-        """
-        pass
+        Set the page numbers to export.
 
-    def end_export(self):
+        :param numbers: an integer, a list/tuple/iterable of integers,
+                        or ``None`` (default). The page numbers of the
+                        pages to export. By default, all pages are
+                        exported.
+
+        EXAMPLES::
+
+            >>> from quill.exporter.base import ExporterBase
+            >>> exporter = ExporterBase()
+            >>> exporter.get_page_numbers(sample_book)
+            [0, 1, 2]
+            >>> exporter.set_page_numbers(1)
+            >>> exporter.get_page_numbers(sample_book)
+            [1]
         """
-        Called at the beginning of the export process.
+        if numbers is None:
+            del self._page_numbers
+            return
+        try:
+            self._page_numbers = list(numbers)
+        except TypeError:
+            self._page_numbers = [int(numbers)]
+
+    def get_page_numbers(self, book):
         """
-        pass
+        Return the page numbers to be exported.
+        
+        :param book: the notebook to use, instance of
+                     :class:`~quill.book.Book`. This is necessary to
+                     be able to list all page numbers.
+
+        :rtype: list of integers
+
+        EXAMPLES::
+
+            >>> from quill.exporter.base import ExporterBase
+            >>> exporter = ExporterBase()
+            >>> exporter.get_page_numbers(sample_book)
+            [0, 1, 2]
+            >>> exporter.set_page_numbers(1)
+            >>> exporter.get_page_numbers(sample_book)
+            [1]
+        """
+        try:
+            return self._page_numbers
+        except AttributeError:
+            return range(book.n_pages())
+
 
     ##################################################################
     #
@@ -30,8 +71,6 @@ class ExporterBase(object):
 
         :param book: the notebook to export
         """
-        self.begin_export()
-        book.save(self)
-        self.end_export()
+        raise NotImplemented('you need to define an export method for book')
 
     
