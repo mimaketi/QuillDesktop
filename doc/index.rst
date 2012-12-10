@@ -1,12 +1,13 @@
-.. Quill View/Converter documentation master file, created by
+.. Quill Desktop documentation master file, created by
    sphinx-quickstart on Sun Dec  9 15:37:30 2012.
 
-Welcome to Quill View/Converter's documentation!
+Welcome to Quill Desktop's documentation!
 ================================================
 
 Quill is an open-source handwriting note-taking app for Android
-tablets. This program lets you view ``.quill`` backup files on your
-desktop, and/or convert them to different formats. 
+tablets. This program is a desktop companion for it. It lets you view
+``.quill`` backup files without your Android device, and/or convert
+them to different formats.
 
 * Google play market: https://market.android.com/details?id=com.write.Quill
 * Google code project page: http://code.google.com/p/android-quill/
@@ -27,7 +28,8 @@ EXAMPLES::
 Use as a Command-Line Converter
 -------------------------------
 
-If you specify input and output filename then the 
+If you specify input and output filename. The format is automatically
+detected from the file extension.
 
 EXAMPLES::
 
@@ -44,8 +46,9 @@ Want to add support for your favorite file format? Head over to the
 Authors
 -------
 
-* Volker Braun
-* Nicholas A. Knouf (http://zeitkunst.org)
+* Volker Braun: Framework, GUI, more export file formats.
+* Nicholas A. Knouf (http://zeitkunst.org): Initial quill to SVG
+  converter.
 
 
 License

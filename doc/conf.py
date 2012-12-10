@@ -42,7 +42,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Quill View/Converter'
+project = u'Quill Desktop'
 copyright = u'2012, Volker Braun'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -166,7 +166,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'QuillViewConverterdoc'
+htmlhelp_basename = 'QuillDesktopdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -185,7 +185,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'QuillViewConverter.tex', u'Quill View/Converter Documentation',
+  ('index', 'QuillDesktop.tex', u'Quill Desktop Documentation',
    u'Volker Braun', 'manual'),
 ]
 
@@ -215,7 +215,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'quillviewconverter', u'Quill View/Converter Documentation',
+    ('index', 'quilldesktop', u'Quill Desktop Documentation',
      [u'Volker Braun'], 1)
 ]
 
@@ -229,8 +229,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'QuillViewConverter', u'Quill View/Converter Documentation',
-   u'Volker Braun', 'QuillViewConverter', 'One line description of project.',
+  ('index', 'QuillDesktop', u'Quill Desktop Documentation',
+   u'Volker Braun', 'QuillDesktop', 'A desktop companion for the Quill Android app.',
    'Miscellaneous'),
 ]
 

@@ -4,4 +4,4 @@
 \#*\#
 bin/python
 *.quill
-doc/_*
+doc/_build
