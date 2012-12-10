@@ -6,8 +6,18 @@ import sys
 sys.path.append('src')
 
 
+def test_xournal_import():
+    from quill.importer.xournal import Xournal
+    infile = 'test/Example_Notebook.xoj'
+    imp = Xournal(infile)
+    import quill.importer.xournal
+    doctest.testmod(quill.importer.xournal, globs={'sample_importer': imp})
+    
+
 
 def run_doctests():
+    test_xournal_import()
+
     from quill.importer.quill_importer import QuillImporter
     infile = 'test/Example_Notebook.quill'
     imp = QuillImporter(infile)
@@ -15,6 +25,7 @@ def run_doctests():
     page = book.get_page(0)
     import quill.importer.base
     doctest.testmod(quill.importer.base, globs={'sample_importer': imp})
+
     import quill.book
     doctest.testmod(quill.book, globs={'sample_book': book})
     import quill.page

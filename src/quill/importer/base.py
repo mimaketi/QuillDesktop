@@ -126,7 +126,6 @@ class ImporterBase(object):
         """
         Helper to convert Python time to milliseconds.
         """
-        import datetime
         import time
         return time.mktime(python_time.timetuple()) * 1000
 
@@ -135,7 +134,7 @@ class ImporterBase(object):
         Helper to get the current time in milliseconds.
         """
         import datetime
-        return self._time_to_millis(datetime.now())
+        return self._time_to_millis(datetime.datetime.now())
 
     def __len__(self):
         """
