@@ -36,6 +36,8 @@ def run_doctests():
     doctest.testmod(quill.exporter.ps, globs={'sample_book': book})
     import quill.exporter.svg
     doctest.testmod(quill.exporter.svg, globs={'sample_book': book})
+    import quill.exporter.xournal
+    doctest.testmod(quill.exporter.xournal, globs={'sample_book': book})
 
 
 if __name__ == '__main__':

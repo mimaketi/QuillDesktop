@@ -7,10 +7,6 @@ EXAMPLES::
     >>> from tempfile import TemporaryFile
     >>> tmp = TemporaryFile(suffix='ps')
     >>> Postscript(tmp).book(sample_book)
-    Title is set to Example Notebook
-    UUID is set to 1fd6a485-33ed-4a45-a5a1-e06e55fdca57
-    Creation time set to 2012-12-09 14:57:25
-    Last modification time set to 2012-12-09 14:57:25
 """
 
 import cairo

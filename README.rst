@@ -17,10 +17,6 @@ If you are looking for Quill the Android app:
 TODO
 ----
 
-* The script doesn't currently deal with earlier Quill formats.
-
-* The script doesn't deal with line art.
-
 * Better error handling
 
 * Incorporate tags into SVG metadata
@@ -40,7 +36,7 @@ Authors
 * Volker Braun: Framework, GUI, more export file formats.
 * Nicholas A. Knouf (http://zeitkunst.org): Initial quill to SVG
   converter.
-
+* Yuri Shirman: Xournal export
 
 License
 -------

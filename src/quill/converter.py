@@ -29,6 +29,9 @@ class QuillConverter(object):
         if f.endswith('.ps'):
             from quill.exporter.ps import Postscript
             return Postscript
+        if f.endswith('.xoj'):
+            from quill.exporter.xournal import Xournal
+            return Xournal
         raise NotImplementedError('cannot export '+self._outfile)
     
     def run(self, page_number=None):
