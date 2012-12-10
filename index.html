@@ -81,8 +81,15 @@ any platform if you have GTK, PyGTK, and PyCairo installed. Use the
 <p>If you specify input and output filename. The format is automatically
 detected from the file extension.</p>
 <p>EXAMPLES:</p>
-<div class="highlight-python"><pre>[user@localhost]$ quill file.quill file.pdf</pre>
+<div class="highlight-python"><pre>[user@localhost]$ quill input.quill output.pdf</pre>
 </div>
+<p>Possible output file formats are:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">output.pdf</span></tt>: portable document format (PDF)</li>
+<li><tt class="docutils literal"><span class="pre">output.ps</span></tt>: Postscript (PS)</li>
+<li><tt class="docutils literal"><span class="pre">output.svg</span></tt>: scalable vector graphics (SVG)</li>
+<li><tt class="docutils literal"><span class="pre">output.xoj</span></tt>: Xournal (<a class="reference external" href="http://xournal.sourceforge.net">http://xournal.sourceforge.net</a>)</li>
+</ul>
 </div>
 <div class="section" id="programmers-guide">
 <h2>Programmers Guide<a class="headerlink" href="#programmers-guide" title="Permalink to this headline">¶</a></h2>
@@ -95,6 +102,7 @@ detected from the file extension.</p>
 <li>Volker Braun: Framework, GUI, more export file formats.</li>
 <li>Nicholas A. Knouf (<a class="reference external" href="http://zeitkunst.org">http://zeitkunst.org</a>): Initial quill to SVG
 converter.</li>
+<li>Yuri Shirman: Xournal export</li>
 </ul>
 </div>
 <div class="section" id="license">

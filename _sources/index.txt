@@ -43,7 +43,14 @@ detected from the file extension.
 
 EXAMPLES::
 
-    [user@localhost]$ quill file.quill file.pdf
+    [user@localhost]$ quill input.quill output.pdf
+
+Possible output file formats are:
+
+* ``output.pdf``: portable document format (PDF)
+* ``output.ps``: Postscript (PS)
+* ``output.svg``: scalable vector graphics (SVG)
+* ``output.xoj``: Xournal (http://xournal.sourceforge.net)
 
 
 Programmers Guide
@@ -59,6 +66,7 @@ Authors
 * Volker Braun: Framework, GUI, more export file formats.
 * Nicholas A. Knouf (http://zeitkunst.org): Initial quill to SVG
   converter.
+* Yuri Shirman: Xournal export
 
 
 License
