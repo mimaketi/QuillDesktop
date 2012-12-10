@@ -25,6 +25,11 @@ EXAMPLES::
     [user@localhost]$ quill --gui
 
 
+.. image:: screenshot.png
+    :align: center
+    :alt: Sceenshot of the GUI
+
+
 Use as a Command-Line Converter
 -------------------------------
 
