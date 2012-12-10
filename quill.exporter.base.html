@@ -1,0 +1,205 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Base Class for Exporters &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="index.html" />
+    <link rel="up" title="Programmers Guide" href="code.html" />
+    <link rel="next" title="More Advanced Base Class for Exporters" href="quill.exporter.base2.html" />
+    <link rel="prev" title="Importer for Quill Archives" href="quill.importer.quill_importer.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.exporter.base2.html" title="More Advanced Base Class for Exporters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quill.importer.quill_importer.html" title="Importer for Quill Archives"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" accesskey="U">Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-quill.exporter.base">
+<span id="base-class-for-exporters"></span><h1>Base Class for Exporters<a class="headerlink" href="#module-quill.exporter.base" title="Permalink to this headline">¶</a></h1>
+<p>Base class for all exporters</p>
+<dl class="class">
+<dt id="quill.exporter.base.ExporterBase">
+<em class="property">class </em><tt class="descclassname">quill.exporter.base.</tt><tt class="descname">ExporterBase</tt><a class="reference internal" href="_modules/quill/exporter/base.html#ExporterBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base.ExporterBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="quill.exporter.base.ExporterBase.book">
+<tt class="descname">book</tt><big>(</big><em>book</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base.html#ExporterBase.book"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base.ExporterBase.book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the notebook.</p>
+<p>Must be implemented in derived classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>book</strong> &#8211; the notebook to export</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base.ExporterBase.get_page_numbers">
+<tt class="descname">get_page_numbers</tt><big>(</big><em>book</em><big>)</big><a class="headerlink" href="#quill.exporter.base.ExporterBase.get_page_numbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the page numbers to be exported.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>book</strong> &#8211; the notebook to use, instance of
+<a class="reference internal" href="quill.book.html#quill.book.Book" title="quill.book.Book"><tt class="xref py py-class docutils literal"><span class="pre">Book</span></tt></a>. This is necessary to
+be able to list all page numbers.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of integers</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">quill.exporter.base</span> <span class="kn">import</span> <span class="n">ExporterBase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exporter</span> <span class="o">=</span> <span class="n">ExporterBase</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exporter</span><span class="o">.</span><span class="n">get_page_numbers</span><span class="p">(</span><span class="n">sample_book</span><span class="p">)</span>
+<span class="go">[0, 1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exporter</span><span class="o">.</span><span class="n">set_page_numbers</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exporter</span><span class="o">.</span><span class="n">get_page_numbers</span><span class="p">(</span><span class="n">sample_book</span><span class="p">)</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base.ExporterBase.set_page_numbers">
+<tt class="descname">set_page_numbers</tt><big>(</big><em>numbers=None</em><big>)</big><a class="headerlink" href="#quill.exporter.base.ExporterBase.set_page_numbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the page numbers to export.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>numbers</strong> &#8211; an integer, a list/tuple/iterable of integers,
+or <tt class="docutils literal"><span class="pre">None</span></tt> (default). The page numbers of the
+pages to export. By default, all pages are
+exported.</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">quill.exporter.base</span> <span class="kn">import</span> <span class="n">ExporterBase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exporter</span> <span class="o">=</span> <span class="n">ExporterBase</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exporter</span><span class="o">.</span><span class="n">get_page_numbers</span><span class="p">(</span><span class="n">sample_book</span><span class="p">)</span>
+<span class="go">[0, 1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exporter</span><span class="o">.</span><span class="n">set_page_numbers</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exporter</span><span class="o">.</span><span class="n">get_page_numbers</span><span class="p">(</span><span class="n">sample_book</span><span class="p">)</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="quill.exporter.base.QuillExporterError">
+<em class="property">exception </em><tt class="descclassname">quill.exporter.base.</tt><tt class="descname">QuillExporterError</tt><a class="headerlink" href="#quill.exporter.base.QuillExporterError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quill.importer.quill_importer.html"
+                        title="previous chapter">Importer for Quill Archives</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quill.exporter.base2.html"
+                        title="next chapter">More Advanced Base Class for Exporters</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/quill.exporter.base.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.exporter.base2.html" title="More Advanced Base Class for Exporters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quill.importer.quill_importer.html" title="Importer for Quill Archives"
+             >previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" >Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>More Advanced Base Class for Exporters &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="index.html" />
+    <link rel="up" title="Programmers Guide" href="code.html" />
+    <link rel="prev" title="Base Class for Exporters" href="quill.exporter.base.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.exporter.base.html" title="Base Class for Exporters"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" accesskey="U">Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-quill.exporter.base2">
+<span id="more-advanced-base-class-for-exporters"></span><h1>More Advanced Base Class for Exporters<a class="headerlink" href="#module-quill.exporter.base2" title="Permalink to this headline">¶</a></h1>
+<p>More advanced base class</p>
+<p>You probably want to implement your exporter on top of this base
+class. The default methods just print to stdout.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">quill.exporter.base2</span> <span class="kn">import</span> <span class="n">ExporterBase2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ExporterBase2</span><span class="p">()</span><span class="o">.</span><span class="n">book</span><span class="p">(</span><span class="n">sample_book</span><span class="p">)</span>    
+<span class="go">Beginning export</span>
+<span class="go">Title is set to Example Notebook</span>
+<span class="go">UUID is set to 1fd6a485-33ed-4a45-a5a1-e06e55fdca57</span>
+<span class="go">Creation time set to 2012-12-09 14:57:25</span>
+<span class="go">Last modification time set to 2012-12-09 14:57:25</span>
+<span class="go">New page, aspect ratio 0.707</span>
+<span class="go">Draw image at (0.13,0.605):(0.455,0.739)</span>
+<span class="go">Draw pen stroke with 40 points</span>
+<span class="go">Draw pen stroke with 8 points</span>
+<span class="go">Draw pen stroke with 59 points</span>
+<span class="go">Draw pen stroke with 31 points</span>
+<span class="go">Draw pen stroke with 44 points</span>
+<span class="go">Draw pen stroke with 36 points</span>
+<span class="go">Draw pen stroke with 22 points</span>
+<span class="go">Draw pen stroke with 9 points</span>
+<span class="go">Draw pen stroke with 6 points</span>
+<span class="go">Draw pen stroke with 18 points</span>
+<span class="go">Draw pen stroke with 21 points</span>
+<span class="gp">...</span>
+<span class="go">Draw pen stroke with 17 points</span>
+<span class="go">Draw pen stroke with 14 points</span>
+<span class="go">Draw pen stroke with 34 points</span>
+<span class="go">Draw pen stroke with 11 points</span>
+<span class="go">Draw pen stroke with 18 points</span>
+<span class="go">Draw pen stroke with 11 points</span>
+<span class="go">Draw pen stroke with 11 points</span>
+<span class="go">Draw pen stroke with 4 points</span>
+<span class="go">Draw pen stroke with 28 points</span>
+<span class="go">Draw pen stroke with 32 points</span>
+<span class="go">Draw pen stroke with 29 points</span>
+<span class="go">Draw pen stroke with 21 points</span>
+<span class="go">New page, aspect ratio 0.707</span>
+<span class="go">Draw pen stroke with 12 points</span>
+<span class="go">Draw pen stroke with 30 points</span>
+<span class="go">Draw pen stroke with 26 points</span>
+<span class="go">Draw pen stroke with 50 points</span>
+<span class="go">Draw pen stroke with 54 points</span>
+<span class="go">New page, aspect ratio 0.707</span>
+<span class="go">Ending export</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="quill.exporter.base2.ExporterBase2">
+<em class="property">class </em><tt class="descclassname">quill.exporter.base2.</tt><tt class="descname">ExporterBase2</tt><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="quill.exporter.base.html#quill.exporter.base.ExporterBase" title="quill.exporter.base.ExporterBase"><tt class="xref py py-class docutils literal"><span class="pre">quill.exporter.base.ExporterBase</span></tt></a></p>
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.begin_export">
+<tt class="descname">begin_export</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.begin_export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.begin_export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook to be called at the beginning of the export process.</p>
+<p>You should override this method in your own exporter to set it
+up. This method returns nothing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.book">
+<tt class="descname">book</tt><big>(</big><em>book</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.book"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the notebook.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>book</strong> &#8211; the notebook to export, instance of
+<a class="reference internal" href="quill.book.html#quill.book.Book" title="quill.book.Book"><tt class="xref py py-class docutils literal"><span class="pre">Book</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You should not have to override this method, it defers
+drawing to the other methods.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.creation_time">
+<tt class="descname">creation_time</tt><big>(</big><em>ctime</em>, <em>ctime_millis</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.creation_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.creation_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the notebook creation time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ctime</strong> (<em>datetime</em>) &#8211; the creation time as python object</li>
+<li><strong>ctime_millis</strong> (<em>integer</em>) &#8211; the creation time as milliseconds</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method will be called before the first empty page (see
+<a class="reference internal" href="#quill.exporter.base2.ExporterBase2.new_page" title="quill.exporter.base2.ExporterBase2.new_page"><tt class="xref py py-meth docutils literal"><span class="pre">new_page()</span></tt></a>) is inserted. You should override this method
+to save it in your exported document.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.end_export">
+<tt class="descname">end_export</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.end_export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.end_export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called at the beginning of the export process.</p>
+<p>You should override this method in your own exporter to tear
+it down. This method returns nothing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.image">
+<tt class="descname">image</tt><big>(</big><em>image</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an image to the current page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>image</strong> &#8211; the image to export, instance of
+<a class="reference internal" href="quill.image.html#quill.image.Image" title="quill.image.Image"><tt class="xref py py-class docutils literal"><span class="pre">Image</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+<p>You should override this method to draw the image on the
+most recently added page. This method will only be called
+after an empty page (see <a class="reference internal" href="#quill.exporter.base2.ExporterBase2.new_page" title="quill.exporter.base2.ExporterBase2.new_page"><tt class="xref py py-meth docutils literal"><span class="pre">new_page()</span></tt></a>) has been inserted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.modification_time">
+<tt class="descname">modification_time</tt><big>(</big><em>mtime</em>, <em>mtime_millis</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.modification_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.modification_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the notebook last-modified time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mtime</strong> (<em>datetime</em>) &#8211; the last modification time as python
+object</li>
+<li><strong>mtime_millis</strong> (<em>integer</em>) &#8211; the last modification time as
+milliseconds</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method will be called before the first empty page (see
+<a class="reference internal" href="#quill.exporter.base2.ExporterBase2.new_page" title="quill.exporter.base2.ExporterBase2.new_page"><tt class="xref py py-meth docutils literal"><span class="pre">new_page()</span></tt></a>) is inserted. You should override this method
+to save it in your exported document.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.new_page">
+<tt class="descname">new_page</tt><big>(</big><em>page</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.new_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.new_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new empty page to the exported document.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>page</strong> &#8211; the page to export, instance of
+<a class="reference internal" href="quill.page.html#quill.page.Page" title="quill.page.Page"><tt class="xref py py-class docutils literal"><span class="pre">Page</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+<p>You should override this method to add a new empty page with
+the specified aspect ratio and background to your document.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.page">
+<tt class="descname">page</tt><big>(</big><em>page</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export a page</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>page</strong> &#8211; the page to export, instance of
+<a class="reference internal" href="quill.page.html#quill.page.Page" title="quill.page.Page"><tt class="xref py py-class docutils literal"><span class="pre">Page</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You should not have to override this method, it defers
+drawing to the other methods.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.stroke">
+<tt class="descname">stroke</tt><big>(</big><em>stroke</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.stroke"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.stroke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a pen stroke to the current page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stroke</strong> &#8211; the pen stroke to export, instance of
+<a class="reference internal" href="quill.stroke.html#quill.stroke.Stroke" title="quill.stroke.Stroke"><tt class="xref py py-class docutils literal"><span class="pre">Stroke</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+<p>You should override this method to draw the pen stroke on the
+most recently added page. This method will only be called
+after an empty page (see <a class="reference internal" href="#quill.exporter.base2.ExporterBase2.new_page" title="quill.exporter.base2.ExporterBase2.new_page"><tt class="xref py py-meth docutils literal"><span class="pre">new_page()</span></tt></a>) has been inserted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.title">
+<tt class="descname">title</tt><big>(</big><em>title</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the title.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>title</strong> (<em>string</em>) &#8211; the notebook title</td>
+</tr>
+</tbody>
+</table>
+<p>This method will be called before the first empty page (see
+<a class="reference internal" href="#quill.exporter.base2.ExporterBase2.new_page" title="quill.exporter.base2.ExporterBase2.new_page"><tt class="xref py py-meth docutils literal"><span class="pre">new_page()</span></tt></a>) is inserted. You should override this method
+to save it in your exported document.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.uuid">
+<tt class="descname">uuid</tt><big>(</big><em>uuid</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/base2.html#ExporterBase2.uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.uuid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the notebook UUID.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>uuid</strong> (<em>string</em>) &#8211; the notebook UUID</td>
+</tr>
+</tbody>
+</table>
+<p>This method will be called before the first empty page (see
+<a class="reference internal" href="#quill.exporter.base2.ExporterBase2.new_page" title="quill.exporter.base2.ExporterBase2.new_page"><tt class="xref py py-meth docutils literal"><span class="pre">new_page()</span></tt></a>) is inserted. You should override this method
+to save it in your exported document.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quill.exporter.base.html"
+                        title="previous chapter">Base Class for Exporters</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/quill.exporter.base2.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.exporter.base.html" title="Base Class for Exporters"
+             >previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" >Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

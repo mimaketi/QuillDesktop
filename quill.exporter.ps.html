@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Export to Postscript (PS) &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="index.html" />
+    <link rel="up" title="Programmers Guide" href="code.html" />
+    <link rel="prev" title="Export to Portable Document Format (PDF)" href="quill.exporter.pdf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.exporter.pdf.html" title="Export to Portable Document Format (PDF)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" accesskey="U">Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-quill.exporter.ps">
+<span id="export-to-postscript-ps"></span><h1>Export to Postscript (PS)<a class="headerlink" href="#module-quill.exporter.ps" title="Permalink to this headline">¶</a></h1>
+<p>Export to Postscript (PS)</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">quill.exporter.ps</span> <span class="kn">import</span> <span class="n">Postscript</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryFile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span> <span class="o">=</span> <span class="n">TemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s">&#39;ps&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Postscript</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span><span class="o">.</span><span class="n">book</span><span class="p">(</span><span class="n">sample_book</span><span class="p">)</span>
+<span class="go">Title is set to Example Notebook</span>
+<span class="go">UUID is set to 1fd6a485-33ed-4a45-a5a1-e06e55fdca57</span>
+<span class="go">Creation time set to 2012-12-09 14:57:25</span>
+<span class="go">Last modification time set to 2012-12-09 14:57:25</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="quill.exporter.ps.Postscript">
+<em class="property">class </em><tt class="descclassname">quill.exporter.ps.</tt><tt class="descname">Postscript</tt><big>(</big><em>fileobj</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/ps.html#Postscript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.ps.Postscript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="quill.exporter.cairo_surface_paginated.html#quill.exporter.cairo_surface_paginated.CairoSurfacePaginated" title="quill.exporter.cairo_surface_paginated.CairoSurfacePaginated"><tt class="xref py py-class docutils literal"><span class="pre">quill.exporter.cairo_surface_paginated.CairoSurfacePaginated</span></tt></a></p>
+<p>Exporter to PS</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fileobj</strong> &#8211; a filename or a file-like object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quill.exporter.pdf.html"
+                        title="previous chapter">Export to Portable Document Format (PDF)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/quill.exporter.ps.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.exporter.pdf.html" title="Export to Portable Document Format (PDF)"
+             >previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" >Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>quill.stroke &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for quill.stroke</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Single Pen Stroke</span>
+
+<span class="sd">EXAMPLES::</span>
+
+<span class="sd">    &gt;&gt;&gt; sample_stroke  # doctest: +ELLIPSIS</span>
+<span class="sd">    &lt;quill.stroke.Stroke object at 0x...&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">graphics_object</span> <span class="kn">import</span> <span class="n">GraphicsObject</span>
+
+
+
+<div class="viewcode-block" id="Stroke"><a class="viewcode-back" href="../../quill.stroke.html#quill.stroke.Stroke">[docs]</a><span class="k">class</span> <span class="nc">Stroke</span><span class="p">(</span><span class="n">GraphicsObject</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Stroke</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pressure</span> <span class="o">=</span> <span class="n">pressure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_red</span> <span class="o">=</span> <span class="n">red</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_green</span> <span class="o">=</span> <span class="n">green</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_blue</span> <span class="o">=</span> <span class="n">blue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_points</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="Stroke.has_pressure"><a class="viewcode-back" href="../../quill.stroke.html#quill.stroke.Stroke.has_pressure">[docs]</a>    <span class="k">def</span> <span class="nf">has_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return whether the pen stroke has varying width (fountain pen tool).</span>
+<span class="sd">        </span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        </span>
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_stroke.has_pressure()</span>
+<span class="sd">            False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pressure</span>
+</div>
+<div class="viewcode-block" id="Stroke.red"><a class="viewcode-back" href="../../quill.stroke.html#quill.stroke.Stroke.red">[docs]</a>    <span class="k">def</span> <span class="nf">red</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the red value.</span>
+
+<span class="sd">        :rtype: integer from ``0`` to ``0xff``</span>
+
+<span class="sd">        EXAMPLES::</span>
+
+<span class="sd">            &gt;&gt;&gt; sample_stroke.red()</span>
+<span class="sd">            128</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_red</span>
+</div>
+<div class="viewcode-block" id="Stroke.green"><a class="viewcode-back" href="../../quill.stroke.html#quill.stroke.Stroke.green">[docs]</a>    <span class="k">def</span> <span class="nf">green</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the green value.</span>
+
+<span class="sd">        :rtype: integer from ``0`` to ``0xff``</span>
+
+<span class="sd">        EXAMPLES::</span>
+
+<span class="sd">            &gt;&gt;&gt; sample_stroke.green()</span>
+<span class="sd">            0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_green</span>
+</div>
+<div class="viewcode-block" id="Stroke.blue"><a class="viewcode-back" href="../../quill.stroke.html#quill.stroke.Stroke.blue">[docs]</a>    <span class="k">def</span> <span class="nf">blue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the blue value.</span>
+
+<span class="sd">        :rtype: integer from ``0`` to ``0xff``</span>
+
+<span class="sd">        EXAMPLES::</span>
+
+<span class="sd">            &gt;&gt;&gt; sample_stroke.blue()</span>
+<span class="sd">            0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_blue</span>
+</div>
+<div class="viewcode-block" id="Stroke.rgb"><a class="viewcode-back" href="../../quill.stroke.html#quill.stroke.Stroke.rgb">[docs]</a>    <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return color.</span>
+
+<span class="sd">        :rtype: tuple of three floats, ranging from 0 to 1.</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_stroke.red()</span>
+<span class="sd">            128</span>
+<span class="sd">            &gt;&gt;&gt; sample_stroke.green()</span>
+<span class="sd">            0</span>
+<span class="sd">            &gt;&gt;&gt; sample_stroke.blue()</span>
+<span class="sd">            0</span>
+<span class="sd">            &gt;&gt;&gt; sample_stroke.rgb()</span>
+<span class="sd">            (0.5019607843137255, 0.0, 0.0)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="o">/</span><span class="mf">255.0</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="o">/</span><span class="mf">255.0</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="o">/</span><span class="mf">255.0</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Stroke.n_points"><a class="viewcode-back" href="../../quill.stroke.html#quill.stroke.Stroke.n_points">[docs]</a>    <span class="k">def</span> <span class="nf">n_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the number of sample points.</span>
+
+<span class="sd">        :rtype: integer</span>
+
+<span class="sd">        EXAMPLES::</span>
+
+<span class="sd">            &gt;&gt;&gt; sample_stroke.n_points()</span>
+<span class="sd">            40</span>
+<span class="sd">            &gt;&gt;&gt; len(sample_stroke)</span>
+<span class="sd">            40</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_points</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Stroke.get_point"><a class="viewcode-back" href="../../quill.stroke.html#quill.stroke.Stroke.get_point">[docs]</a>    <span class="k">def</span> <span class="nf">get_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ``i``-th point</span>
+<span class="sd">        </span>
+<span class="sd">        :param integer i: index of the point to return</span>
+
+<span class="sd">        :rtype: a tuple containing three floats (x, y, and pressure)</span>
+
+<span class="sd">        EXAMPLES::</span>
+
+<span class="sd">            &gt;&gt;&gt; sample_stroke.get_point(24)</span>
+<span class="sd">            (0.17748723924160004, 0.09612473845481873, 0.5307917594909668)</span>
+<span class="sd">            &gt;&gt;&gt; sample_stroke[24]</span>
+<span class="sd">            (0.17748723924160004, 0.09612473845481873, 0.5307917594909668)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</div>
+    <span class="n">__len__</span> <span class="o">=</span> <span class="n">n_points</span>
+
+    <span class="n">__getitem__</span> <span class="o">=</span> <span class="n">get_point</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

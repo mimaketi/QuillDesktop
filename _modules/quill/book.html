@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>quill.book &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for quill.book</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A Single Notebook</span>
+
+<span class="sd">The :class:`book` class stores metadata and the list of pages.</span>
+
+<span class="sd">EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">    &gt;&gt;&gt; sample_book   # doctest: +ELLIPSIS</span>
+<span class="sd">    Book title: Example Notebook</span>
+<span class="sd">    Uuid: 1fd6a485-33ed-4a45-a5a1-e06e55fdca57</span>
+<span class="sd">    Created ...</span>
+<span class="sd">    Last modified ...</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span> <span class="nn">quill.decorators</span> <span class="kn">import</span> <span class="n">cached_method</span>
+
+
+
+<div class="viewcode-block" id="Book"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book">[docs]</a><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Metadata for a notebook</span>
+
+<span class="sd">    EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; type(sample_book)</span>
+<span class="sd">        &lt;class &#39;quill.book.Book&#39;&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">mtime</span><span class="p">,</span> <span class="n">ctime</span><span class="p">,</span> <span class="n">pages</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The Python constructor.</span>
+
+<span class="sd">        This is not meant to be called by hand, but instead from the</span>
+<span class="sd">        :meth:`~quill.importer.base.get_book` method.</span>
+
+<span class="sd">        :param string title: title of the notebook</span>
+<span class="sd">        :param string uuid: uuid of the notebook</span>
+<span class="sd">        :param integer mtime: last modification time in milliseconds</span>
+<span class="sd">        :param integer ctime: creation time in milliseconds </span>
+<span class="sd">        :param list pages: pages, either a list or an object</span>
+<span class="sd">                           implementing `__len__` and `__getitem__`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_uuid</span> <span class="o">=</span> <span class="n">uuid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mtime_millis</span> <span class="o">=</span> <span class="n">mtime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ctime_millis</span> <span class="o">=</span> <span class="n">ctime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pages</span> <span class="o">=</span> <span class="n">pages</span>
+
+<div class="viewcode-block" id="Book.uuid"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.uuid">[docs]</a>    <span class="k">def</span> <span class="nf">uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the UUID of the notebook.</span>
+
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_book.uuid()</span>
+<span class="sd">            &#39;1fd6a485-33ed-4a45-a5a1-e06e55fdca57&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_uuid</span>
+</div>
+<div class="viewcode-block" id="Book.title"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.title">[docs]</a>    <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the title of the notebook.</span>
+
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_book.title()</span>
+<span class="sd">            &#39;Example Notebook&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_title</span>
+</div>
+<div class="viewcode-block" id="Book.mtime_millis"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.mtime_millis">[docs]</a>    <span class="k">def</span> <span class="nf">mtime_millis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the last modification time of the notebook in milliseconds.</span>
+
+<span class="sd">        :rtype: integer</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_book.mtime_millis()</span>
+<span class="sd">            1355065045000</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mtime_millis</span>
+</div>
+<div class="viewcode-block" id="Book.ctime_millis"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.ctime_millis">[docs]</a>    <span class="k">def</span> <span class="nf">ctime_millis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the creation time of the notebook in milliseconds.</span>
+
+<span class="sd">        :rtype: integer</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_book.ctime_millis()</span>
+<span class="sd">            1355064642000</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ctime_millis</span>
+</div>
+<div class="viewcode-block" id="Book.mtime"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.mtime">[docs]</a>    <span class="k">def</span> <span class="nf">mtime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the last modification time of the notebook.</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_book.mtime()</span>
+<span class="sd">            datetime.datetime(2012, 12, 9, 14, 57, 25)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mtime_millis</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1000.0</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Book.ctime"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.ctime">[docs]</a>    <span class="k">def</span> <span class="nf">ctime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the creation time of the notebook.</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_book.ctime()</span>
+<span class="sd">            datetime.datetime(2012, 12, 9, 14, 57, 25)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mtime_millis</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1000.0</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">__pretty_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a datetime object or a int() Epoch timestamp and return a</span>
+<span class="sd">        pretty string like &#39;an hour ago&#39;, &#39;Yesterday&#39;, &#39;3 months ago&#39;,</span>
+<span class="sd">        &#39;just now&#39;, etc</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">now</span> <span class="o">-</span> <span class="n">time</span> 
+        <span class="n">second_diff</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">seconds</span>
+        <span class="n">day_diff</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">days</span>
+        <span class="k">if</span> <span class="n">day_diff</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;from future?&#39;</span>
+        <span class="k">if</span> <span class="n">day_diff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">second_diff</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s">&quot;just now&quot;</span>
+            <span class="k">if</span> <span class="n">second_diff</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">second_diff</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; seconds ago&quot;</span>
+            <span class="k">if</span> <span class="n">second_diff</span> <span class="o">&lt;</span> <span class="mi">120</span><span class="p">:</span>
+                <span class="k">return</span>  <span class="s">&quot;a minute ago&quot;</span>
+            <span class="k">if</span> <span class="n">second_diff</span> <span class="o">&lt;</span> <span class="mi">3600</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span> <span class="n">second_diff</span> <span class="o">/</span> <span class="mi">60</span> <span class="p">)</span> <span class="o">+</span> <span class="s">&quot; minutes ago&quot;</span>
+            <span class="k">if</span> <span class="n">second_diff</span> <span class="o">&lt;</span> <span class="mi">7200</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s">&quot;an hour ago&quot;</span>
+            <span class="k">if</span> <span class="n">second_diff</span> <span class="o">&lt;</span> <span class="mi">86400</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span> <span class="n">second_diff</span> <span class="o">/</span> <span class="mi">3600</span> <span class="p">)</span> <span class="o">+</span> <span class="s">&quot; hours ago&quot;</span>
+        <span class="k">if</span> <span class="n">day_diff</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;Yesterday&quot;</span>
+        <span class="k">if</span> <span class="n">day_diff</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">day_diff</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; days ago&quot;</span>
+        <span class="k">if</span> <span class="n">day_diff</span> <span class="o">&lt;</span> <span class="mi">31</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">day_diff</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; weeks ago&quot;</span>
+        <span class="k">if</span> <span class="n">day_diff</span> <span class="o">&lt;</span> <span class="mi">365</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">day_diff</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; months ago&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">day_diff</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; years ago&quot;</span>
+
+<div class="viewcode-block" id="Book.pretty_mtime"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.pretty_mtime">[docs]</a>    <span class="k">def</span> <span class="nf">pretty_mtime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pretty_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mtime</span><span class="p">())</span>
+</div>
+<div class="viewcode-block" id="Book.pretty_ctime"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.pretty_ctime">[docs]</a>    <span class="k">def</span> <span class="nf">pretty_ctime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pretty_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ctime</span><span class="p">())</span>
+</div>
+<div class="viewcode-block" id="Book.n_pages"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.n_pages">[docs]</a>    <span class="k">def</span> <span class="nf">n_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the number of pages.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pages</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Book.get_page"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.get_page">[docs]</a>    <span class="k">def</span> <span class="nf">get_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the n-th page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pages</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">_place_in_book</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">page</span>
+</div>
+    <span class="n">__len__</span> <span class="o">=</span> <span class="n">n_pages</span>
+
+    <span class="n">__getitem__</span> <span class="o">=</span> <span class="n">get_page</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_pages</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span>  <span class="o">=</span> <span class="s">&#39;Book title: &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#39;Uuid: &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">()</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#39;Created &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">pretty_ctime</span><span class="p">()</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#39;Last modified &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">pretty_ctime</span><span class="p">()</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Book.save"><a class="viewcode-back" href="../../quill.book.html#quill.book.Book.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exporter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save the book using the exporter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_pages</span><span class="p">()):</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">exporter</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

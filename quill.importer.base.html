@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Base Class for Importers &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="index.html" />
+    <link rel="up" title="Programmers Guide" href="code.html" />
+    <link rel="next" title="Importer for Quill Archives" href="quill.importer.quill_importer.html" />
+    <link rel="prev" title="Image" href="quill.image.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.importer.quill_importer.html" title="Importer for Quill Archives"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quill.image.html" title="Image"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" accesskey="U">Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-quill.importer.base">
+<span id="base-class-for-importers"></span><h1>Base Class for Importers<a class="headerlink" href="#module-quill.importer.base" title="Permalink to this headline">¶</a></h1>
+<p>Base class for all importers</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_importer</span>  
+<span class="go">&lt;quill.importer.quill_importer.QuillImporter object at 0x...&gt;</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="quill.importer.base.ImporterBase">
+<em class="property">class </em><tt class="descclassname">quill.importer.base.</tt><tt class="descname">ImporterBase</tt><a class="reference internal" href="_modules/quill/importer/base.html#ImporterBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.ImporterBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="quill.importer.base.ImporterBase.ctime_millis">
+<tt class="descname">ctime_millis</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/importer/base.html#ImporterBase.ctime_millis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.ImporterBase.ctime_millis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the creation time in milliseconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+<p>You should overriding this method in derived
+classes. Otherwise the current time will be used.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_importer</span><span class="o">.</span><span class="n">ctime_millis</span><span class="p">()</span>
+<span class="go">1355064642000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.importer.base.ImporterBase.get_book">
+<tt class="descname">get_book</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/importer/base.html#ImporterBase.get_book"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.ImporterBase.get_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Book object from the importer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">a <a class="reference internal" href="quill.book.html#quill.book.Book" title="quill.book.Book"><tt class="xref py py-class docutils literal"><span class="pre">Book</span></tt></a> object</td>
+</tr>
+</tbody>
+</table>
+<p>You should not override this method. All it does is takes the
+metadata and creates the corresponding <a class="reference internal" href="quill.book.html#module-quill.book" title="quill.book"><tt class="xref py py-class docutils literal"><span class="pre">book</span></tt></a>
+object.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_importer</span><span class="o">.</span><span class="n">get_book</span><span class="p">()</span>  
+<span class="go">Book title: Example Notebook</span>
+<span class="go">Uuid: 1fd6a485-33ed-4a45-a5a1-e06e55fdca57</span>
+<span class="go">Created ...</span>
+<span class="go">Last modified ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.importer.base.ImporterBase.get_page">
+<tt class="descname">get_page</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/quill/importer/base.html#ImporterBase.get_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.ImporterBase.get_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the n-th page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">a <a class="reference internal" href="quill.page.html#quill.page.Page" title="quill.page.Page"><tt class="xref py py-class docutils literal"><span class="pre">Page</span></tt></a> object</td>
+</tr>
+</tbody>
+</table>
+<p>Must be implemented in derived classes.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_importer</span><span class="o">.</span><span class="n">n_pages</span><span class="p">()</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.importer.base.ImporterBase.mtime_millis">
+<tt class="descname">mtime_millis</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/importer/base.html#ImporterBase.mtime_millis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.ImporterBase.mtime_millis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last modification time in milliseconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+<p>You should overriding this method in derived
+classes. Otherwise the current time will be used.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_importer</span><span class="o">.</span><span class="n">mtime_millis</span><span class="p">()</span>
+<span class="go">1355065045000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.importer.base.ImporterBase.n_pages">
+<tt class="descname">n_pages</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/importer/base.html#ImporterBase.n_pages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.ImporterBase.n_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of pages.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+<p>Must be implemented in derived classes.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_importer</span><span class="o">.</span><span class="n">n_pages</span><span class="p">()</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.importer.base.ImporterBase.title">
+<tt class="descname">title</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/importer/base.html#ImporterBase.title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.ImporterBase.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the title of the book.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>You should overriding this method in derived
+classes. Otherwise a default title will be used.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_importer</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+<span class="go">&#39;Example Notebook&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.importer.base.ImporterBase.uuid">
+<tt class="descname">uuid</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/importer/base.html#ImporterBase.uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.ImporterBase.uuid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the UUID of the book.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>You should overriding this method in derived
+classes. Otherwise a random UUID will be generated.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_importer</span><span class="o">.</span><span class="n">uuid</span><span class="p">()</span>
+<span class="go">&#39;1fd6a485-33ed-4a45-a5a1-e06e55fdca57&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="quill.importer.base.QuillImporterError">
+<em class="property">exception </em><tt class="descclassname">quill.importer.base.</tt><tt class="descname">QuillImporterError</tt><a class="reference internal" href="_modules/quill/importer/base.html#QuillImporterError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.base.QuillImporterError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quill.image.html"
+                        title="previous chapter">Image</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quill.importer.quill_importer.html"
+                        title="next chapter">Importer for Quill Archives</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/quill.importer.base.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.importer.quill_importer.html" title="Importer for Quill Archives"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quill.image.html" title="Image"
+             >previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" >Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

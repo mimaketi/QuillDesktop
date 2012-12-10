@@ -1,0 +1,200 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to Quill Desktop’s documentation! &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="#" />
+    <link rel="next" title="Programmers Guide" href="code.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code.html" title="Programmers Guide"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Quill Desktop 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-quill-desktop-s-documentation">
+<h1>Welcome to Quill Desktop&#8217;s documentation!<a class="headerlink" href="#welcome-to-quill-desktop-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Quill is an open-source handwriting note-taking app for Android
+tablets. This program is a desktop companion for it. It lets you view
+<tt class="docutils literal"><span class="pre">.quill</span></tt> backup files without your Android device, and/or convert
+them to different formats.</p>
+<ul class="simple">
+<li>Google play market: <a class="reference external" href="https://market.android.com/details?id=com.write.Quill">https://market.android.com/details?id=com.write.Quill</a></li>
+<li>Google code project page: <a class="reference external" href="http://code.google.com/p/android-quill/">http://code.google.com/p/android-quill/</a></li>
+</ul>
+<div class="section" id="use-as-a-gui-viewer">
+<h2>Use as a GUI Viewer<a class="headerlink" href="#use-as-a-gui-viewer" title="Permalink to this headline">¶</a></h2>
+<p>This program is as PyGTK application, so it will run on pretty much
+any platform if you have GTK, PyGTK, and PyCairo installed. Use the
+<tt class="docutils literal"><span class="pre">--gui</span></tt> switch to show the graphical user interface.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><pre>[user@localhost]$ quill --gui</pre>
+</div>
+<img alt="Sceenshot of the GUI" class="align-center" src="_images/screenshot.png" />
+</div>
+<div class="section" id="use-as-a-command-line-converter">
+<h2>Use as a Command-Line Converter<a class="headerlink" href="#use-as-a-command-line-converter" title="Permalink to this headline">¶</a></h2>
+<p>If you specify input and output filename. The format is automatically
+detected from the file extension.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><pre>[user@localhost]$ quill file.quill file.pdf</pre>
+</div>
+</div>
+<div class="section" id="programmers-guide">
+<h2>Programmers Guide<a class="headerlink" href="#programmers-guide" title="Permalink to this headline">¶</a></h2>
+<p>Want to add support for your favorite file format? Head over to the
+<a class="reference internal" href="code.html#code"><em>Programmers Guide</em></a> and find out how!</p>
+</div>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Volker Braun: Framework, GUI, more export file formats.</li>
+<li>Nicholas A. Knouf (<a class="reference external" href="http://zeitkunst.org">http://zeitkunst.org</a>): Initial quill to SVG
+converter.</li>
+</ul>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>GPL v3</p>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code.html#notebook-data-model">Notebook Data Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quill.book.html">A Single Notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.page.html">Page of a Notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.stroke.html">Pen Stroke</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.image.html">Image</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#importing-files">Importing Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quill.importer.base.html">Base Class for Importers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.importer.quill_importer.html">Importer for Quill Archives</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#exporting-files">Exporting Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quill.exporter.base.html">Base Class for Exporters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.exporter.base2.html">More Advanced Base Class for Exporters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.exporter.cairo_context.html">Draw to a Cairo Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.exporter.cairo_surface_paginated.html">Draw to a Cairo Surface with Multi-Page support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.exporter.svg.html">Export to Scalable Vector Graphics (SVG)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.exporter.pdf.html">Export to Portable Document Format (PDF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quill.exporter.ps.html">Export to Postscript (PS)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to Quill Desktop&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#use-as-a-gui-viewer">Use as a GUI Viewer</a></li>
+<li><a class="reference internal" href="#use-as-a-command-line-converter">Use as a Command-Line Converter</a></li>
+<li><a class="reference internal" href="#programmers-guide">Programmers Guide</a></li>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="code.html"
+                        title="next chapter">Programmers Guide</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code.html" title="Programmers Guide"
+             >next</a> |</li>
+        <li><a href="#">Quill Desktop 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

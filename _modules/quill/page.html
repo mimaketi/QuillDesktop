@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>quill.page &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for quill.page</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Page of a Notebook</span>
+
+<span class="sd">The :class:`Page` class stores everything that is drawn on the page as</span>
+<span class="sd">well as format data of the page (like aspect ratio).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+
+<div class="viewcode-block" id="Page"><a class="viewcode-back" href="../../quill.page.html#quill.page.Page">[docs]</a><span class="k">class</span> <span class="nc">Page</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Page of a notebook</span>
+
+<span class="sd">    EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; type(sample_page)</span>
+<span class="sd">        &lt;class &#39;quill.page.Page&#39;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; print sample_page</span>
+<span class="sd">        page number 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">aspect_ratio</span><span class="p">,</span> <span class="n">strokes</span><span class="p">,</span> <span class="n">images</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_book</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_number</span> <span class="o">=</span> <span class="n">number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_uuid</span> <span class="o">=</span> <span class="n">uuid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_aspect_ratio</span> <span class="o">=</span> <span class="n">aspect_ratio</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_strokes</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">strokes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_images</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">graphics_object</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strokes</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_images</span><span class="p">:</span>
+            <span class="n">graphics_object</span><span class="o">.</span><span class="n">_place_on_page</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_place_in_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper to set the notebook that the page is on.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_book</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_book</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">book</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;page may only be placed in one book&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_book</span> <span class="o">=</span> <span class="n">book</span>
+
+<div class="viewcode-block" id="Page.book"><a class="viewcode-back" href="../../quill.page.html#quill.page.Page.book">[docs]</a>    <span class="k">def</span> <span class="nf">book</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the notebook containing the page.</span>
+
+<span class="sd">        :rtype: a :class:`~quill.book.Book`</span>
+
+<span class="sd">        EXAMPLES::</span>
+
+<span class="sd">            &gt;&gt;&gt; sample_page.book()    # doctest: +ELLIPSIS</span>
+<span class="sd">            Book title: Example Notebook</span>
+<span class="sd">            Uuid: 1fd6a485-33ed-4a45-a5a1-e06e55fdca57</span>
+<span class="sd">            Created ...</span>
+<span class="sd">            Last modified ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_book</span>
+</div>
+<div class="viewcode-block" id="Page.number"><a class="viewcode-back" href="../../quill.page.html#quill.page.Page.number">[docs]</a>    <span class="k">def</span> <span class="nf">number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the page number.</span>
+
+<span class="sd">        :rtype: integer</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_page.number()</span>
+<span class="sd">            0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number</span>
+</div>
+<div class="viewcode-block" id="Page.uuid"><a class="viewcode-back" href="../../quill.page.html#quill.page.Page.uuid">[docs]</a>    <span class="k">def</span> <span class="nf">uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the page uuid.</span>
+
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_page.uuid()</span>
+<span class="sd">            &#39;9aa10c71-c872-4d2b-b97e-1845fd5a4cfc&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_uuid</span>
+        
+</div>
+<div class="viewcode-block" id="Page.aspect_ratio"><a class="viewcode-back" href="../../quill.page.html#quill.page.Page.aspect_ratio">[docs]</a>    <span class="k">def</span> <span class="nf">aspect_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the aspect ratio.</span>
+
+<span class="sd">        :rtype: float, the ratio of width divided by height.</span>
+
+<span class="sd">        EXAMPLES::</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; sample_page.aspect_ratio()</span>
+<span class="sd">            0.7071067690849304</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aspect_ratio</span>
+</div>
+<div class="viewcode-block" id="Page.strokes"><a class="viewcode-back" href="../../quill.page.html#quill.page.Page.strokes">[docs]</a>    <span class="k">def</span> <span class="nf">strokes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the strokes </span>
+<span class="sd">        </span>
+<span class="sd">        :rtype: a tuple of :class:`~quill.stroke.Stroke` objects</span>
+
+<span class="sd">        EXAMPLES::</span>
+
+<span class="sd">            &gt;&gt;&gt; len(sample_page.strokes())</span>
+<span class="sd">            125</span>
+<span class="sd">            &gt;&gt;&gt; sample_page.strokes()[0]   # doctest: +ELLIPSIS</span>
+<span class="sd">            &lt;quill.stroke.Stroke object at 0x...&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strokes</span>
+</div>
+<div class="viewcode-block" id="Page.images"><a class="viewcode-back" href="../../quill.page.html#quill.page.Page.images">[docs]</a>    <span class="k">def</span> <span class="nf">images</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the images </span>
+<span class="sd">        </span>
+<span class="sd">        :rtype: a tuple of :class:`~quill.image.Image` objects</span>
+
+<span class="sd">        EXAMPLES::</span>
+
+<span class="sd">            &gt;&gt;&gt; sample_page.images()</span>
+<span class="sd">            (image at (0.13,0.605):(0.455,0.739),)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_images</span>
+</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&#39;page number &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+<div class="viewcode-block" id="Page.save"><a class="viewcode-back" href="../../quill.page.html#quill.page.Page.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exporter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save the page using the exporter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">():</span>
+            <span class="n">exporter</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">stroke</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">strokes</span><span class="p">():</span>
+            <span class="n">exporter</span><span class="o">.</span><span class="n">stroke</span><span class="p">(</span><span class="n">stroke</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

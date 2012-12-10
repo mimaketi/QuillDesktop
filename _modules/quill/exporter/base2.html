@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>quill.exporter.base2 &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for quill.exporter.base2</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">More advanced base class</span>
+
+<span class="sd">You probably want to implement your exporter on top of this base class.</span>
+
+<span class="sd">EXAMPLES::</span>
+
+<span class="sd">    &gt;&gt;&gt; from quill.exporter.base2 import ExporterBase2</span>
+<span class="sd">    &gt;&gt;&gt; ExporterBase2().book(sample_book)    # doctest: +ELLIPSIS</span>
+<span class="sd">    Beginning export</span>
+<span class="sd">    Title is set to Example Notebook</span>
+<span class="sd">    UUID is set to 1fd6a485-33ed-4a45-a5a1-e06e55fdca57</span>
+<span class="sd">    Creation time set to 2012-12-09 14:57:25</span>
+<span class="sd">    Last modification time set to 2012-12-09 14:57:25</span>
+<span class="sd">    New page, aspect ratio 0.707</span>
+<span class="sd">    Draw image at (0.13,0.605):(0.455,0.739)</span>
+<span class="sd">    Draw pen stroke with 40 points</span>
+<span class="sd">    Draw pen stroke with 8 points</span>
+<span class="sd">    Draw pen stroke with 59 points</span>
+<span class="sd">    Draw pen stroke with 31 points</span>
+<span class="sd">    Draw pen stroke with 44 points</span>
+<span class="sd">    Draw pen stroke with 36 points</span>
+<span class="sd">    Draw pen stroke with 22 points</span>
+<span class="sd">    Draw pen stroke with 9 points</span>
+<span class="sd">    Draw pen stroke with 6 points</span>
+<span class="sd">    Draw pen stroke with 18 points</span>
+<span class="sd">    Draw pen stroke with 21 points</span>
+<span class="sd">    ...</span>
+<span class="sd">    Draw pen stroke with 17 points</span>
+<span class="sd">    Draw pen stroke with 14 points</span>
+<span class="sd">    Draw pen stroke with 34 points</span>
+<span class="sd">    Draw pen stroke with 11 points</span>
+<span class="sd">    Draw pen stroke with 18 points</span>
+<span class="sd">    Draw pen stroke with 11 points</span>
+<span class="sd">    Draw pen stroke with 11 points</span>
+<span class="sd">    Draw pen stroke with 4 points</span>
+<span class="sd">    Draw pen stroke with 28 points</span>
+<span class="sd">    Draw pen stroke with 32 points</span>
+<span class="sd">    Draw pen stroke with 29 points</span>
+<span class="sd">    Draw pen stroke with 21 points</span>
+<span class="sd">    New page, aspect ratio 0.707</span>
+<span class="sd">    Draw pen stroke with 12 points</span>
+<span class="sd">    Draw pen stroke with 30 points</span>
+<span class="sd">    Draw pen stroke with 26 points</span>
+<span class="sd">    Draw pen stroke with 50 points</span>
+<span class="sd">    Draw pen stroke with 54 points</span>
+<span class="sd">    New page, aspect ratio 0.707</span>
+<span class="sd">    Ending export</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">base</span> <span class="kn">import</span> <span class="n">ExporterBase</span>
+
+
+
+
+
+<div class="viewcode-block" id="ExporterBase2"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2">[docs]</a><span class="k">class</span> <span class="nc">ExporterBase2</span><span class="p">(</span><span class="n">ExporterBase</span><span class="p">):</span>
+    
+    <span class="c">##################################################################</span>
+    <span class="c">#</span>
+    <span class="c"># Easier way to implement your own exporter: define exporters for</span>
+    <span class="c"># metadata and graphics objects.</span>
+    <span class="c">#</span>
+    <span class="c">##################################################################</span>
+
+<div class="viewcode-block" id="ExporterBase2.begin_export"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.begin_export">[docs]</a>    <span class="k">def</span> <span class="nf">begin_export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Called at the beginning of the export process.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="s">&#39;Beginning export&#39;</span>
+</div>
+<div class="viewcode-block" id="ExporterBase2.end_export"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.end_export">[docs]</a>    <span class="k">def</span> <span class="nf">end_export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Called at the beginning of the export process.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="s">&#39;Ending export&#39;</span>
+</div>
+<div class="viewcode-block" id="ExporterBase2.title"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.title">[docs]</a>    <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the title.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="s">&#39;Title is set to &#39;</span><span class="o">+</span><span class="n">title</span>
+</div>
+<div class="viewcode-block" id="ExporterBase2.uuid"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.uuid">[docs]</a>    <span class="k">def</span> <span class="nf">uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;UUID is set to &#39;</span><span class="o">+</span><span class="n">uuid</span>
+</div>
+<div class="viewcode-block" id="ExporterBase2.creation_time"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.creation_time">[docs]</a>    <span class="k">def</span> <span class="nf">creation_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctime</span><span class="p">,</span> <span class="n">ctime_millis</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Creation time set to &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ctime</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="ExporterBase2.modification_time"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.modification_time">[docs]</a>    <span class="k">def</span> <span class="nf">modification_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mtime</span><span class="p">,</span> <span class="n">mtime_millis</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Last modification time set to &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">mtime</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ExporterBase2.new_page"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.new_page">[docs]</a>    <span class="k">def</span> <span class="nf">new_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new empty page to the exported document.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="s">&#39;New page, aspect ratio &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">aspect_ratio</span><span class="p">(),</span> <span class="mi">3</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="ExporterBase2.stroke"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.stroke">[docs]</a>    <span class="k">def</span> <span class="nf">stroke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stroke</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="s">&#39;Draw &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stroke</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="ExporterBase2.image"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.image">[docs]</a>    <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Draw &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="c">##################################################################</span>
+    <span class="c">#</span>
+    <span class="c"># The rest is the implementation of the book() method, you</span>
+    <span class="c"># shouldn&#39;t have to override anything.</span>
+    <span class="c">#</span>
+    <span class="c">##################################################################</span>
+</div>
+<div class="viewcode-block" id="ExporterBase2.book"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.book">[docs]</a>    <span class="k">def</span> <span class="nf">book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Export the notebook.</span>
+
+<span class="sd">        :param book: the notebook to export</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">begin_export</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">uuid</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">creation_time</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">ctime</span><span class="p">(),</span> <span class="n">book</span><span class="o">.</span><span class="n">ctime_millis</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modification_time</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">mtime</span><span class="p">(),</span> <span class="n">book</span><span class="o">.</span><span class="n">mtime_millis</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">n_pages</span><span class="p">()):</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">book</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_export</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="ExporterBase2.page"><a class="viewcode-back" href="../../../quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.page">[docs]</a>    <span class="k">def</span> <span class="nf">page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Export a page</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">images</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">stroke</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">strokes</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stroke</span><span class="p">(</span><span class="n">stroke</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
