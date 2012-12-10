@@ -16,23 +16,25 @@ class QuillConverter(object):
         if f.endswith('.quill'):
             from quill.importer.quill_importer import QuillImporter
             return QuillImporter
-        raise NotImplemented('cannot import '+self._infile)
+        raise NotImplementedError('cannot import '+self._infile)
 
-    def _init_importer(self):
-        f = self._infile.lower()
+    def _init_exporter(self):
+        f = self._outfile.lower()
         if f.endswith('.svg'):
-            from quill.exporter.svg import SvgExporter
-            return SvgExporter
+            from quill.exporter.svg import Svg
+            return Svg
         if f.endswith('.pdf'):
-            from quill.exporter.pdf import PdfExporter
-            return PdfExporter
-        raise NotImplemented('cannot export '+self._outfile)
+            from quill.exporter.pdf import Pdf
+            return Pdf
+        if f.endswith('.ps'):
+            from quill.exporter.pdf import Postscript
+            return Postscript
+        raise NotImplementedError('cannot export '+self._outfile)
     
 
-    def run(self):
+    def run(self, page_number=None):
         imp = self._imp_class(self._infile)
         exp = self._exp_class(self._outfile)
-        for page in imp:
-            exp.save(page)
-        imp.close()
-        exp.close()
+        book = imp.get_book()
+        exp.set_page_numbers(page_number)
+        exp.book(book)

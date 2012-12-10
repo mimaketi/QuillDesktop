@@ -30,6 +30,12 @@ def run_doctests():
     doctest.testmod(quill.exporter.base, globs={'sample_book': book})
     import quill.exporter.base2
     doctest.testmod(quill.exporter.base2, globs={'sample_book': book})
+    import quill.exporter.pdf
+    doctest.testmod(quill.exporter.pdf, globs={'sample_book': book})
+    import quill.exporter.ps
+    doctest.testmod(quill.exporter.ps, globs={'sample_book': book})
+    import quill.exporter.svg
+    doctest.testmod(quill.exporter.svg, globs={'sample_book': book})
 
 
 if __name__ == '__main__':

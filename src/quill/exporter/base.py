@@ -2,6 +2,10 @@
 Base class for all exporters
 """
 
+class QuillExporterError(Exception):
+    pass
+
+
 
 class ExporterBase(object):
 
@@ -25,7 +29,10 @@ class ExporterBase(object):
             [1]
         """
         if numbers is None:
-            del self._page_numbers
+            try:
+                del self._page_numbers
+            except AttributeError:
+                pass
             return
         try:
             self._page_numbers = list(numbers)
@@ -68,9 +75,11 @@ class ExporterBase(object):
     def book(self, book):
         """
         Export the notebook.
+        
+        Must be implemented in derived classes.
 
         :param book: the notebook to export
         """
-        raise NotImplemented('you need to define an export method for book')
+        raise NotImplementedError('book() must be implemented in derived classes.')
 
     

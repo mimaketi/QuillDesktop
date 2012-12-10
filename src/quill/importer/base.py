@@ -98,7 +98,7 @@ class ImporterBase(object):
             >>> sample_importer.n_pages()
             3
         """
-        raise NotImplemented
+        raise NotImplementedError('n_pages() must be implemented in derived classes')
 
     def get_page(self, n):
         """
@@ -113,7 +113,7 @@ class ImporterBase(object):
             >>> sample_importer.n_pages()
             3
         """
-        raise NotImplemented
+        raise NotImplementedError('get_page() must be implemented in derived classes')
 
     ##################################################################
     #

@@ -13,9 +13,10 @@ from graphics_object import GraphicsObject
 
 class Stroke(GraphicsObject):
     
-    def __init__(self, pressure, red, green, blue, points):
+    def __init__(self, pressure, thickness, red, green, blue, points):
         super(Stroke, self).__init__()
         self._pressure = pressure
+        self._thickness = thickness
         self._red = red
         self._green = green
         self._blue = blue
@@ -36,6 +37,22 @@ class Stroke(GraphicsObject):
             False
         """
         return self._pressure
+
+    def thickness(self):
+        """
+        Return the pen thickness.
+
+        The thickness is counted ``1/1600f`` of the page
+        height. Quill's "ultra-fine" pen has a thickness of 1.
+
+        :rtype: integer
+
+        EXAMPLES::
+
+            >>> sample_stroke.thickness()
+            5
+        """
+        return self._thickness
 
     def red(self):
         """

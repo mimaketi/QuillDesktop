@@ -16,9 +16,9 @@ class Application:
     The Quill convert app window
     """
     
-    def __init__(self, app_home_dir):
+    def __init__(self, app_home_dir, filename=None):
         self.home_dir = app_home_dir
-        gladefile = os.path.join(self.home_dir, 'res', 'QuillConvert.xml')
+        gladefile = os.path.join(self.home_dir, 'res', 'QuillDesktop.xml')
         builder = gtk.Builder()
         builder.add_from_file(gladefile)
         self.window = builder.get_object('main')

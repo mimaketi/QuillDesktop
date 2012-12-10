@@ -96,7 +96,7 @@ class QuillPage(object):
             p = struct.unpack(">f", fp.read(4))
             points.append((x[0], y[0], p[0]))
         from quill.stroke import Stroke
-        return Stroke(fountain_pen, red, green, blue, points)
+        return Stroke(fountain_pen, thickness[0], red, green, blue, points)
 
 
     def _draw(self, cairo_context):
