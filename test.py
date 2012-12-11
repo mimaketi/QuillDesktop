@@ -14,10 +14,13 @@ def test_xournal_import():
     doctest.testmod(quill.importer.xournal, globs={'xournal_file': infile})
     
 
+def test_converter():
+    infile = os.path.abspath('test/Example_Notebook.quill')
+    import quill.converter
+    doctest.testmod(quill.converter, globs={'quill_file': infile})
+    
 
-def run_doctests():
-    test_xournal_import()
-
+def test_import_export():
     from quill.importer.quill_importer import QuillImporter
     infile = 'test/Example_Notebook.quill'
     imp = QuillImporter(infile)
@@ -55,6 +58,12 @@ def run_doctests():
     doctest.testmod(quill.exporter.svg, globs={'sample_book': book})
     import quill.exporter.xournal
     doctest.testmod(quill.exporter.xournal, globs={'sample_book': book})
+
+
+def run_doctests():
+    test_xournal_import()
+    test_import_export()
+    test_converter()
 
 
 if __name__ == '__main__':
