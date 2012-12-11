@@ -19,12 +19,13 @@ class Page(object):
         page number 0
     """
     
-    def __init__(self, number, uuid, aspect_ratio, strokes, images):
+    def __init__(self, number, uuid, aspect_ratio, strokes, lines, images):
         self._book = None
         self._number = number
         self._uuid = uuid
         self._aspect_ratio = aspect_ratio
         self._strokes = tuple(strokes)
+        self._lines = tuple(lines)
         self._images = tuple(images)
         for graphics_object in self._strokes + self._images:
             graphics_object._place_on_page(self)
@@ -107,6 +108,21 @@ class Page(object):
             pen stroke with 40 points
         """
         return self._strokes
+
+    def lines(self):
+        """
+        Return the straight lines
+        
+        :rtype: a tuple of :class:`~quill.line.Line` objects
+
+        EXAMPLES::
+
+            >>> len(sample_page.lines())
+            2
+            >>> sample_page.lines()[0]
+            line from (0.175,0.532) to (0.629,0.442)
+        """
+        return self._lines
 
     def images(self):
         """

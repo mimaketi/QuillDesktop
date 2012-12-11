@@ -3,23 +3,19 @@ Single Pen Stroke
 
 EXAMPLES::
 
-    >>> sample_stroke  # doctest: +ELLIPSIS
+    >>> sample_stroke
     pen stroke with 40 points
 """
 
-from graphics_object import GraphicsObject
+from graphics_object_color import GraphicsObjectThicknessColor
 
 
 
-class Stroke(GraphicsObject):
+class Stroke(GraphicsObjectThicknessColor):
     
     def __init__(self, pressure, thickness, red, green, blue, points):
-        super(Stroke, self).__init__()
+        super(Stroke, self).__init__(thickness, red, green, blue)
         self._pressure = pressure
-        self._thickness = thickness
-        self._red = red
-        self._green = green
-        self._blue = blue
         self._points = tuple(points)
 
     def __repr__(self):
@@ -53,64 +49,6 @@ class Stroke(GraphicsObject):
             5
         """
         return self._thickness
-
-    def red(self):
-        """
-        Return the red value.
-
-        :rtype: integer from ``0`` to ``0xff``
-
-        EXAMPLES::
-
-            >>> sample_stroke.red()
-            128
-        """
-        return self._red
-
-    def green(self):
-        """
-        Return the green value.
-
-        :rtype: integer from ``0`` to ``0xff``
-
-        EXAMPLES::
-
-            >>> sample_stroke.green()
-            0
-        """
-        return self._green
-
-    def blue(self):
-        """
-        Return the blue value.
-
-        :rtype: integer from ``0`` to ``0xff``
-
-        EXAMPLES::
-
-            >>> sample_stroke.blue()
-            0
-        """
-        return self._blue
-
-    def rgb(self):
-        """
-        Return color.
-
-        :rtype: tuple of three floats, ranging from 0 to 1.
-
-        EXAMPLES::
-        
-            >>> sample_stroke.red()
-            128
-            >>> sample_stroke.green()
-            0
-            >>> sample_stroke.blue()
-            0
-            >>> sample_stroke.rgb()
-            (0.5019607843137255, 0.0, 0.0)
-        """
-        return (float(self.red()/255.0), float(self.green()/255.0), float(self.blue()/255.0))
 
     def n_points(self):
         """

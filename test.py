@@ -2,16 +2,16 @@
 
 import doctest
 import sys
+import os
 
 sys.path.append('src')
 
 
 def test_xournal_import():
     from quill.importer.xournal import Xournal
-    infile = 'test/Example_Notebook.xoj'
-    imp = Xournal(infile)
+    infile = os.path.abspath('test/Example_Notebook.xoj')
     import quill.importer.xournal
-    doctest.testmod(quill.importer.xournal, globs={'sample_importer': imp})
+    doctest.testmod(quill.importer.xournal, globs={'xournal_file': infile})
     
 
 
@@ -34,6 +34,8 @@ def run_doctests():
     doctest.testmod(quill.graphics_object, globs={'sample_stroke': page.strokes()[0]})
     import quill.stroke
     doctest.testmod(quill.stroke, globs={'sample_stroke': page.strokes()[0]})
+    import quill.line
+    doctest.testmod(quill.line, globs={'sample_line': page.lines()[0]})
     import quill.image
     doctest.testmod(quill.image, globs={'sample_image': page.images()[0]})
 

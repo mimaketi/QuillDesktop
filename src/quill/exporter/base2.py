@@ -15,6 +15,8 @@ EXAMPLES::
     Last modification time set to 2012-12-09 14:57:25
     New page, aspect ratio 0.707
     Draw image at (0.13,0.605):(0.455,0.739)
+    Draw line from (0.175,0.532) to (0.629,0.442)
+    Draw line from (0.169,0.433) to (0.632,0.528)
     Draw pen stroke with 40 points
     Draw pen stroke with 8 points
     Draw pen stroke with 59 points
@@ -161,6 +163,19 @@ class ExporterBase2(ExporterBase):
         """
         print 'Draw '+str(stroke)
         
+    def line(self, line):
+        """
+        Add a straight line to the current page.
+
+        :param line: the line to export, instance of
+                     :class:`~quill.line.Line`
+
+        You should override this method to draw the pen stroke on the
+        most recently added page. This method will only be called
+        after an empty page (see :meth:`new_page`) has been inserted.
+        """
+        print 'Draw '+str(line)
+        
     def image(self, image):
         """
         Add an image to the current page.
@@ -218,6 +233,8 @@ class ExporterBase2(ExporterBase):
         self.new_page(page)
         for image in page.images():
             self.image(image)
+        for line in page.lines():
+            self.line(line)
         for stroke in page.strokes():
             self.stroke(stroke)
 

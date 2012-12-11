@@ -86,5 +86,13 @@ class CairoContext(ExporterBase2):
                 cr.line_to(p1[0], p1[1])
                 cr.stroke()
 
+    def line(self, line):
+        cr = self._context
+        cr.set_source_rgb(*line.rgb())
+        cr.set_line_width(line.thickness() / self._pen_scale_factor)
+        cr.move_to(line.x0(), line.y0())
+        cr.line_to(line.x1(), line.y1())
+        cr.stroke()
+
     def image(self, image):
         cr = self._context

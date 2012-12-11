@@ -56,12 +56,12 @@ class Xournal(ExporterBase2):
 
     quill_pen_scale_factor = float(1600.0)
     xournal_pen_thickness_factor=0.5
-    xournal_pen_scale_factor=820
+    xournal_page_scale_factor=820
     xournal_x_offset=0
     xournal_y_offset=0
 
     def new_page(self, page):
-        h = self._height = self.xournal_pen_scale_factor
+        h = self._height = self.xournal_page_scale_factor
         w = self._width = h * page.aspect_ratio()
         f = self._fileobj
         if not self._first:
@@ -86,13 +86,16 @@ class Xournal(ExporterBase2):
         else:
             f.write(str(self.xournal_pen_thickness_factor*stroke.thickness()))
         f.write("\">\n")
-        f.write(str(self.xournal_pen_scale_factor*stroke.get_point(0)[0])+ " "+ 
-                str(self.xournal_pen_scale_factor*stroke.get_point(0)[1]+self.xournal_y_offset))
+        f.write(str(self.xournal_page_scale_factor*stroke.get_point(0)[0])+ " "+ 
+                str(self.xournal_page_scale_factor*stroke.get_point(0)[1]+self.xournal_y_offset))
         for point in xrange(stroke.n_points()-1):
             f.write(" "+
-                    str(self.xournal_pen_scale_factor*stroke.get_point(point)[0])+" "+ 
-                    str(self.xournal_pen_scale_factor*stroke.get_point(point)[1]+self.xournal_y_offset))
+                    str(self.xournal_page_scale_factor*stroke.get_point(point)[0])+" "+ 
+                    str(self.xournal_page_scale_factor*stroke.get_point(point)[1]+self.xournal_y_offset))
         f.write("</stroke>\n")
+
+    def line(self, line):
+        pass
 
     def image(self, image):
         pass

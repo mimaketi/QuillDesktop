@@ -56,7 +56,10 @@ class QuillPage(object):
         self.nstrokes = struct.unpack(">i", fp.read(4))
         self.strokes = [ self.read_stroke() for i in xrange(self.nstrokes[0]) ]
         self.nlines = struct.unpack(">i", fp.read(4))
-        # dummy = struct.unpack(">i", fp.read(4))
+        self.lines = [ self.read_line() for i in xrange(self.nlines[0]) ]
+        dummy = struct.unpack(">i", fp.read(4))
+        if dummy != (0,):
+            raise QuillImporterError('out of sync')
         # self.ntext = struct.unpack(">i", fp.read(4))
         
     def read_image(self):
@@ -98,56 +101,20 @@ class QuillPage(object):
         from quill.stroke import Stroke
         return Stroke(fountain_pen, thickness[0], red, green, blue, points)
 
-
-    def _draw(self, cairo_context):
-        cr = cairo_context
-        cr.set_source_rgb(0, 0, 0)
-        cr.set_line_cap(cairo.LINE_CAP_ROUND)
-        cr.set_line_join(cairo.LINE_JOIN_ROUND)
-        # cr.translate(.010, .010)
-        cr.set_line_width(0.003)
-        cr.scale(self.height, self.height)
-        
+    def read_line(self):
         fp = self.fp
-        for stroke in xrange(self.nstrokes[0]):
-            sversion = struct.unpack(">i", fp.read(4))
-            pen_color = struct.unpack(">i", fp.read(4))
-            red = (pen_color[0] >> 16) & 0xFF
-            green = (pen_color[0] >> 8) & 0xFF
-            blue = pen_color[0] & 0xFF
-            cr.set_source_rgb(float(red/255.0), float(green/255.0), float(blue/255.0))
-            pen_thickness = struct.unpack(">i", fp.read(4))
-            pen_thickness_factor = float(pen_thickness[0])/self.pen_scale_factor
-            toolint = struct.unpack(">i", fp.read(4))
-            fountain_pen = (toolint == (0,))
-            N = struct.unpack(">i", fp.read(4))
-        
-            points = []
-            for instance in xrange(N[0]):
-                x = struct.unpack(">f", fp.read(4))
-                y = struct.unpack(">f", fp.read(4))
-                p = struct.unpack(">f", fp.read(4))
-                points.append((x[0], y[0], p[0]))
-
-            if fountain_pen:
-                # width changes, each segment is its own stroke
-                for point in xrange(len(points) - 1):
-                    cr.set_line_width(pen_thickness_factor * ((points[point][2] + points[point+1][2])/2))
-                    cr.move_to(points[point][0], points[point][1])
-                    cr.line_to(points[point + 1][0], points[point + 1][1])
-                    cr.stroke()
-            else:
-                # constant width, join all segment into one stroke
-                cr.set_line_width(pen_thickness_factor)
-                for point in xrange(len(points) - 1):
-                    cr.move_to(points[point][0], points[point][1])
-                    cr.line_to(points[point + 1][0], points[point + 1][1])
-                cr.stroke()
-        
-        self.nlines = struct.unpack(">i", fp.read(4))
-        dummy = struct.unpack(">i", fp.read(4))
-        self.ntext = struct.unpack(">i", fp.read(4))
-
+        version = struct.unpack(">i", fp.read(4))
+        if version != (1,):
+            raise QuillImporterError('wrong line version')
+        pen_color = struct.unpack(">i", fp.read(4))
+        red = (pen_color[0] >> 16) & 0xFF
+        green = (pen_color[0] >> 8) & 0xFF
+        blue = pen_color[0] & 0xFF
+        thickness = struct.unpack(">i", fp.read(4))
+        toolint = struct.unpack(">i", fp.read(4))
+        xy = struct.unpack(">ffff", fp.read(4*4))
+        from quill.line import Line
+        return Line(thickness[0], red, green, blue, xy[0], xy[1], xy[2], xy[3])
 
 class QuillIndex(object):
 
@@ -222,4 +189,5 @@ class QuillImporter(ImporterBase):
             page_file = t.extractfile(page_filename)
             qp = QuillPage(page_file, n)
         from quill.page import Page
-        return Page(n, qp.uuid, qp.aspect_ratio, qp.strokes, qp.images)
+        return Page(n, qp.uuid, qp.aspect_ratio, qp.strokes, qp.lines, qp.images)
+

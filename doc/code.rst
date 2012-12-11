@@ -30,6 +30,7 @@ page. The following modules implement these:
    quill.page
    quill.stroke
    quill.image
+   quill.line
 
 
 Importing Files
@@ -48,7 +49,7 @@ corresponding :mod:`~quill.book` object.
 
    quill.importer.base
    quill.importer.quill_importer
-
+   quill.importer.xournal
 
 
 Exporting Files
