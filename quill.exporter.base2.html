@@ -28,6 +28,7 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Quill Desktop 0.1 documentation" href="index.html" />
     <link rel="up" title="Programmers Guide" href="code.html" />
+    <link rel="next" title="Draw to a Cairo Context" href="quill.exporter.cairo_context.html" />
     <link rel="prev" title="Base Class for Exporters" href="quill.exporter.base.html" /> 
   </head>
   <body>
@@ -40,6 +41,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.exporter.cairo_context.html" title="Draw to a Cairo Context"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="quill.exporter.base.html" title="Base Class for Exporters"
              accesskey="P">previous</a> |</li>
@@ -68,6 +72,8 @@ class. The default methods just print to stdout.</p>
 <span class="go">Last modification time set to 2012-12-09 14:57:25</span>
 <span class="go">New page, aspect ratio 0.707</span>
 <span class="go">Draw image at (0.13,0.605):(0.455,0.739)</span>
+<span class="go">Draw line from (0.175,0.532) to (0.629,0.442)</span>
+<span class="go">Draw line from (0.169,0.433) to (0.632,0.528)</span>
 <span class="go">Draw pen stroke with 40 points</span>
 <span class="go">Draw pen stroke with 8 points</span>
 <span class="go">Draw pen stroke with 59 points</span>
@@ -177,6 +183,24 @@ it down. This method returns nothing.</p>
 </tbody>
 </table>
 <p>You should override this method to draw the image on the
+most recently added page. This method will only be called
+after an empty page (see <a class="reference internal" href="#quill.exporter.base2.ExporterBase2.new_page" title="quill.exporter.base2.ExporterBase2.new_page"><tt class="xref py py-meth docutils literal"><span class="pre">new_page()</span></tt></a>) has been inserted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.exporter.base2.ExporterBase2.line">
+<tt class="descname">line</tt><big>(</big><em>line</em><big>)</big><a class="headerlink" href="#quill.exporter.base2.ExporterBase2.line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a straight line to the current page.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>line</strong> &#8211; the line to export, instance of
+<tt class="xref py py-class docutils literal"><span class="pre">Line</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>You should override this method to draw the pen stroke on the
 most recently added page. This method will only be called
 after an empty page (see <a class="reference internal" href="#quill.exporter.base2.ExporterBase2.new_page" title="quill.exporter.base2.ExporterBase2.new_page"><tt class="xref py py-meth docutils literal"><span class="pre">new_page()</span></tt></a>) has been inserted.</p>
 </dd></dl>
@@ -306,6 +330,9 @@ to save it in your exported document.</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="quill.exporter.base.html"
                         title="previous chapter">Base Class for Exporters</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quill.exporter.cairo_context.html"
+                        title="next chapter">Draw to a Cairo Context</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/quill.exporter.base2.txt"
@@ -337,6 +364,9 @@ to save it in your exported document.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.exporter.cairo_context.html" title="Draw to a Cairo Context"
+             >next</a> |</li>
         <li class="right" >
           <a href="quill.exporter.base.html" title="Base Class for Exporters"
              >previous</a> |</li>

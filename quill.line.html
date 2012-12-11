@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Straight Line &mdash; Quill Desktop 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Quill Desktop 0.1 documentation" href="index.html" />
+    <link rel="up" title="Programmers Guide" href="code.html" />
+    <link rel="next" title="Base Class for Importers" href="quill.importer.base.html" />
+    <link rel="prev" title="Image" href="quill.image.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.importer.base.html" title="Base Class for Importers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quill.image.html" title="Image"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" accesskey="U">Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-quill.line">
+<span id="straight-line"></span><h1>Straight Line<a class="headerlink" href="#module-quill.line" title="Permalink to this headline">¶</a></h1>
+<p>Straight Line</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span>
+<span class="go">line from (0.175,0.532) to (0.629,0.442)</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="quill.line.Line">
+<em class="property">class </em><tt class="descclassname">quill.line.</tt><tt class="descname">Line</tt><big>(</big><em>thickness</em>, <em>red</em>, <em>green</em>, <em>blue</em>, <em>x0</em>, <em>y0</em>, <em>x1</em>, <em>y1</em><big>)</big><a class="reference internal" href="_modules/quill/line.html#Line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.line.Line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">quill.graphics_object_color.GraphicsObjectThicknessColor</span></tt></p>
+<dl class="method">
+<dt id="quill.line.Line.x0">
+<tt class="descname">x0</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/line.html#Line.x0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.line.Line.x0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the x-coordinate of the first point.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span>
+<span class="go">line from (0.175,0.532) to (0.629,0.442)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span><span class="o">.</span><span class="n">x0</span><span class="p">()</span>
+<span class="go">0.17479963600635529</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.line.Line.x1">
+<tt class="descname">x1</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/line.html#Line.x1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.line.Line.x1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the x-coordinate of the second point.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span>
+<span class="go">line from (0.175,0.532) to (0.629,0.442)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span><span class="o">.</span><span class="n">x1</span><span class="p">()</span>
+<span class="go">0.629351019859314</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.line.Line.y0">
+<tt class="descname">y0</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/line.html#Line.y0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.line.Line.y0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the y-coordinate of the first point.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span>
+<span class="go">line from (0.175,0.532) to (0.629,0.442)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span><span class="o">.</span><span class="n">y0</span><span class="p">()</span>
+<span class="go">0.5317864418029785</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.line.Line.y1">
+<tt class="descname">y1</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/line.html#Line.y1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.line.Line.y1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the y-coordinate of the second point.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span>
+<span class="go">line from (0.175,0.532) to (0.629,0.442)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_line</span><span class="o">.</span><span class="n">y1</span><span class="p">()</span>
+<span class="go">0.44183480739593506</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quill.image.html"
+                        title="previous chapter">Image</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quill.importer.base.html"
+                        title="next chapter">Base Class for Importers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/quill.line.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quill.importer.base.html" title="Base Class for Importers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quill.image.html" title="Image"
+             >previous</a> |</li>
+        <li><a href="index.html">Quill Desktop 0.1 documentation</a> &raquo;</li>
+          <li><a href="code.html" >Programmers Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Volker Braun.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -60,6 +60,7 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#P"><strong>P</strong></a>
@@ -68,6 +69,8 @@
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
  
 </div>
 <h2 id="A">A</h2>
@@ -101,10 +104,6 @@
   </dt>
 
       </dl></dd>
-      
-  <dt><a href="quill.stroke.html#quill.stroke.Stroke.blue">blue() (quill.stroke.Stroke method)</a>
-  </dt>
-
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
@@ -222,19 +221,19 @@
   <dt><a href="quill.importer.quill_importer.html#quill.importer.quill_importer.QuillImporter.get_page">(quill.importer.quill_importer.QuillImporter method)</a>
   </dt>
 
+        
+  <dt><a href="quill.importer.xournal.html#quill.importer.xournal.Xournal.get_page">(quill.importer.xournal.Xournal method)</a>
+  </dt>
+
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="quill.exporter.base.html#quill.exporter.base.ExporterBase.get_page_numbers">get_page_numbers() (quill.exporter.base.ExporterBase method)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="quill.stroke.html#quill.stroke.Stroke.get_point">get_point() (quill.stroke.Stroke method)</a>
-  </dt>
-
-      
-  <dt><a href="quill.stroke.html#quill.stroke.Stroke.green">green() (quill.stroke.Stroke method)</a>
   </dt>
 
   </dl></td>
@@ -267,14 +266,50 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="quill.page.html#quill.page.Page.images">images() (quill.page.Page method)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="quill.importer.base.html#quill.importer.base.ImporterBase">ImporterBase (class in quill.importer.base)</a>
+  </dt>
+
+      
+  <dt><a href="quill.exporter.base.html#quill.exporter.base.ExporterBase.is_multipage">is_multipage() (quill.exporter.base.ExporterBase method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="quill.exporter.cairo_surface_paginated.html#quill.exporter.cairo_surface_paginated.CairoSurfacePaginated.is_multipage">(quill.exporter.cairo_surface_paginated.CairoSurfacePaginated method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="quill.line.html#quill.line.Line">Line (class in quill.line)</a>
+  </dt>
+
+      
+  <dt><a href="quill.exporter.base2.html#quill.exporter.base2.ExporterBase2.line">line() (quill.exporter.base2.ExporterBase2 method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="quill.exporter.cairo_context.html#quill.exporter.cairo_context.CairoContext.line">(quill.exporter.cairo_context.CairoContext method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="quill.page.html#quill.page.Page.lines">lines() (quill.page.Page method)</a>
   </dt>
 
   </dl></td>
@@ -330,6 +365,10 @@
 
         
   <dt><a href="quill.importer.quill_importer.html#quill.importer.quill_importer.QuillImporter.n_pages">(quill.importer.quill_importer.QuillImporter method)</a>
+  </dt>
+
+        
+  <dt><a href="quill.importer.xournal.html#quill.importer.xournal.Xournal.n_pages">(quill.importer.xournal.Xournal method)</a>
   </dt>
 
       </dl></dd>
@@ -435,14 +474,22 @@
   <dt><a href="quill.image.html#module-quill.image">quill.image (module)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="quill.importer.base.html#module-quill.importer.base">quill.importer.base (module)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="quill.importer.quill_importer.html#module-quill.importer.quill_importer">quill.importer.quill_importer (module)</a>
+  </dt>
+
+      
+  <dt><a href="quill.importer.xournal.html#module-quill.importer.xournal">quill.importer.xournal (module)</a>
+  </dt>
+
+      
+  <dt><a href="quill.line.html#module-quill.line">quill.line (module)</a>
   </dt>
 
       
@@ -484,17 +531,13 @@
   </dt>
 
       
-  <dt><a href="quill.importer.quill_importer.html#quill.importer.quill_importer.QuillPage.read_stroke">read_stroke() (quill.importer.quill_importer.QuillPage method)</a>
+  <dt><a href="quill.importer.quill_importer.html#quill.importer.quill_importer.QuillPage.read_line">read_line() (quill.importer.quill_importer.QuillPage method)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="quill.stroke.html#quill.stroke.Stroke.red">red() (quill.stroke.Stroke method)</a>
-  </dt>
-
-      
-  <dt><a href="quill.stroke.html#quill.stroke.Stroke.rgb">rgb() (quill.stroke.Stroke method)</a>
+  <dt><a href="quill.importer.quill_importer.html#quill.importer.quill_importer.QuillPage.read_stroke">read_stroke() (quill.importer.quill_importer.QuillPage method)</a>
   </dt>
 
   </dl></td>
@@ -564,6 +607,10 @@
   <dt><a href="quill.importer.quill_importer.html#quill.importer.quill_importer.QuillImporter.title">(quill.importer.quill_importer.QuillImporter method)</a>
   </dt>
 
+        
+  <dt><a href="quill.importer.xournal.html#quill.importer.xournal.Xournal.title">(quill.importer.xournal.Xournal method)</a>
+  </dt>
+
       </dl></dd>
   </dl></td>
 </tr></table>
@@ -597,6 +644,54 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="quill.line.html#quill.line.Line.x0">x0() (quill.line.Line method)</a>
+  </dt>
+
+      
+  <dt><a href="quill.line.html#quill.line.Line.x1">x1() (quill.line.Line method)</a>
+  </dt>
+
+      
+  <dt><a href="quill.importer.xournal.html#quill.importer.xournal.Xournal">Xournal (class in quill.importer.xournal)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="quill.importer.xournal.html#quill.importer.xournal.Xournal.xournal_color_constants">xournal_color_constants (quill.importer.xournal.Xournal attribute)</a>
+  </dt>
+
+      
+  <dt><a href="quill.importer.xournal.html#quill.importer.xournal.Xournal.xournal_page_scale_factor">xournal_page_scale_factor (quill.importer.xournal.Xournal attribute)</a>
+  </dt>
+
+      
+  <dt><a href="quill.importer.xournal.html#quill.importer.xournal.Xournal.xournal_pen_thickness_factor">xournal_pen_thickness_factor (quill.importer.xournal.Xournal attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="quill.line.html#quill.line.Line.y0">y0() (quill.line.Line method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="quill.line.html#quill.line.Line.y1">y1() (quill.line.Line method)</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 

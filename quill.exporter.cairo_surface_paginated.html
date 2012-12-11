@@ -75,6 +75,20 @@
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="quill.exporter.cairo_surface_paginated.CairoSurfacePaginated.is_multipage">
+<tt class="descname">is_multipage</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.exporter.cairo_surface_paginated.CairoSurfacePaginated.is_multipage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether the exporter can export multiple pages.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">quill.exporter.pdf</span> <span class="kn">import</span> <span class="n">Pdf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryFile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span> <span class="o">=</span> <span class="n">TemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s">&#39;pdf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Pdf</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span><span class="o">.</span><span class="n">is_multipage</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="quill.exporter.cairo_surface_paginated.CairoSurfacePaginated.new_page">
 <tt class="descname">new_page</tt><big>(</big><em>page</em><big>)</big><a class="reference internal" href="_modules/quill/exporter/cairo_surface_paginated.html#CairoSurfacePaginated.new_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.exporter.cairo_surface_paginated.CairoSurfacePaginated.new_page" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>

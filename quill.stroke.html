@@ -61,33 +61,14 @@
 <span id="pen-stroke"></span><h1>Pen Stroke<a class="headerlink" href="#module-quill.stroke" title="Permalink to this headline">¶</a></h1>
 <p>Single Pen Stroke</p>
 <p>EXAMPLES:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span>  
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span>
 <span class="go">pen stroke with 40 points</span>
 </pre></div>
 </div>
 <dl class="class">
 <dt id="quill.stroke.Stroke">
 <em class="property">class </em><tt class="descclassname">quill.stroke.</tt><tt class="descname">Stroke</tt><big>(</big><em>pressure</em>, <em>thickness</em>, <em>red</em>, <em>green</em>, <em>blue</em>, <em>points</em><big>)</big><a class="reference internal" href="_modules/quill/stroke.html#Stroke"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.stroke.Stroke" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">quill.graphics_object.GraphicsObject</span></tt></p>
-<dl class="method">
-<dt id="quill.stroke.Stroke.blue">
-<tt class="descname">blue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/stroke.html#Stroke.blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.stroke.Stroke.blue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the blue value.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">integer from <tt class="docutils literal"><span class="pre">0</span></tt> to <tt class="docutils literal"><span class="pre">0xff</span></tt></td>
-</tr>
-</tbody>
-</table>
-<p>EXAMPLES:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span>
-<span class="go">0</span>
-</pre></div>
-</div>
-</dd></dl>
-
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">quill.graphics_object_color.GraphicsObjectThicknessColor</span></tt></p>
 <dl class="method">
 <dt id="quill.stroke.Stroke.get_point">
 <tt class="descname">get_point</tt><big>(</big><em>i</em><big>)</big><a class="reference internal" href="_modules/quill/stroke.html#Stroke.get_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.stroke.Stroke.get_point" title="Permalink to this definition">¶</a></dt>
@@ -107,25 +88,6 @@
 <span class="go">(0.17748723924160004, 0.09612473845481873, 0.5307917594909668)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
 <span class="go">(0.17748723924160004, 0.09612473845481873, 0.5307917594909668)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="quill.stroke.Stroke.green">
-<tt class="descname">green</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/stroke.html#Stroke.green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.stroke.Stroke.green" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the green value.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">integer from <tt class="docutils literal"><span class="pre">0</span></tt> to <tt class="docutils literal"><span class="pre">0xff</span></tt></td>
-</tr>
-</tbody>
-</table>
-<p>EXAMPLES:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span><span class="o">.</span><span class="n">green</span><span class="p">()</span>
-<span class="go">0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -166,50 +128,6 @@
 <span class="go">40</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">sample_stroke</span><span class="p">)</span>
 <span class="go">40</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="quill.stroke.Stroke.red">
-<tt class="descname">red</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/stroke.html#Stroke.red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.stroke.Stroke.red" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the red value.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">integer from <tt class="docutils literal"><span class="pre">0</span></tt> to <tt class="docutils literal"><span class="pre">0xff</span></tt></td>
-</tr>
-</tbody>
-</table>
-<p>EXAMPLES:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span><span class="o">.</span><span class="n">red</span><span class="p">()</span>
-<span class="go">128</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="method">
-<dt id="quill.stroke.Stroke.rgb">
-<tt class="descname">rgb</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/quill/stroke.html#Stroke.rgb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.stroke.Stroke.rgb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return color.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple of three floats, ranging from 0 to 1.</td>
-</tr>
-</tbody>
-</table>
-<p>EXAMPLES:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span><span class="o">.</span><span class="n">red</span><span class="p">()</span>
-<span class="go">128</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span><span class="o">.</span><span class="n">green</span><span class="p">()</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_stroke</span><span class="o">.</span><span class="n">rgb</span><span class="p">()</span>
-<span class="go">(0.5019607843137255, 0.0, 0.0)</span>
 </pre></div>
 </div>
 </dd></dl>

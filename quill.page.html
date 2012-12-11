@@ -64,7 +64,7 @@
 well as format data of the page (like aspect ratio).</p>
 <dl class="class">
 <dt id="quill.page.Page">
-<em class="property">class </em><tt class="descclassname">quill.page.</tt><tt class="descname">Page</tt><big>(</big><em>number</em>, <em>uuid</em>, <em>aspect_ratio</em>, <em>strokes</em>, <em>images</em><big>)</big><a class="reference internal" href="_modules/quill/page.html#Page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.page.Page" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">quill.page.</tt><tt class="descname">Page</tt><big>(</big><em>number</em>, <em>uuid</em>, <em>aspect_ratio</em>, <em>strokes</em>, <em>lines</em>, <em>images</em><big>)</big><a class="reference internal" href="_modules/quill/page.html#Page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.page.Page" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Page of a notebook</p>
 <p>EXAMPLES:</p>
@@ -130,6 +130,27 @@ well as format data of the page (like aspect ratio).</p>
 <p>EXAMPLES:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_page</span><span class="o">.</span><span class="n">images</span><span class="p">()</span>
 <span class="go">(image at (0.13,0.605):(0.455,0.739),)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.page.Page.lines">
+<tt class="descname">lines</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.page.Page.lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the straight lines</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">a tuple of <tt class="xref py py-class docutils literal"><span class="pre">Line</span></tt> objects</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">sample_page</span><span class="o">.</span><span class="n">lines</span><span class="p">())</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_page</span><span class="o">.</span><span class="n">lines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">line from (0.175,0.532) to (0.629,0.442)</span>
 </pre></div>
 </div>
 </dd></dl>
