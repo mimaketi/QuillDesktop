@@ -5,3 +5,5 @@
 bin/python
 *.quill
 doc/_build
+build
+dist
