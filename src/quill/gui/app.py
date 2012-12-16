@@ -3,13 +3,14 @@ The main application window
 """
 
 import os
+import sys
 import gtk
 import pango
 import gtk.glade
+import pkgutil
 
 from about import AboutDialog
 from page_widget import PageWidget
-
 
 from quill.importer.autodetect import autodetect_importer
 from quill.exporter.autodetect import autodetect_exporter
@@ -20,8 +21,8 @@ class Application:
     The Quill convert app window
     """
     
-    def __init__(self, app_home_dir, filename=None):
-        self._home_dir = app_home_dir
+    def __init__(self, filename=None):
+        self._home_dir = d = os.path.dirname(sys.modules['quill'].__file__)
         gladefile = os.path.join(self._home_dir, 'res', 'QuillDesktop.xml')
         builder = gtk.Builder()
         builder.add_from_file(gladefile)
@@ -55,7 +56,9 @@ class Application:
         self.dlg_about.hide()
 
     def on_menuitem_manual_activate(self, widget, data=None):
-        print 'See manual'
+        url = "http://vbraun.github.com/QuillDesktop"
+        import webbrowser
+        webbrowser.open(url, new=2)
 
     def on_menuitem_open_activate(self, widget, data=None):
         self.dlg_open.run()
