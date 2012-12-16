@@ -17,7 +17,7 @@ class Image(GraphicsObject):
     Embedded image on a page.
     """
 
-    def __init__(self, uuid, x0, x1, y0, y1, constrain_aspect):
+    def __init__(self, uuid, x0, x1, y0, y1, constrain_aspect, jpg_data):
         super(Image, self).__init__()
         self._uuid = uuid
         self._x0 = x0
@@ -25,6 +25,7 @@ class Image(GraphicsObject):
         self._y0 = y0
         self._y1 = y1
         self._constrain = constrain_aspect
+        self._data = jpg_data
 
     def __repr__(self):
         s  = 'image at ('
@@ -34,6 +35,19 @@ class Image(GraphicsObject):
         s += str(round(self._y1,3)) + ')'
         return s
 
+    def data(self):
+        r"""
+        Return the image data (jpg).
+
+        :rtype: string
+
+        EXAMPLES::
+        
+            >>> sample_image.data()    # doctest: +ELLIPSIS
+            '\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00...
+        """
+        return self._data
+    
     def uuid(self):
         """
         Return the image uuid.

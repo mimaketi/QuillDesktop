@@ -15,8 +15,8 @@ class QuillPage(object):
     # A line-width of 0.003 gives a good visual approximation to Quill's pen thickness of 5
     pen_scale_factor = float(5.0/0.003)
 
-    def __init__(self, page_file=None, page_number=1):
-        self.page_number = page_number
+    def __init__(self, page_file, blob_loader):
+        self._blob_loader = blob_loader
         fp = self.fp = page_file
         self.version = struct.unpack(">i", fp.read(4))
         if self.version != (6,):
@@ -77,7 +77,7 @@ class QuillPage(object):
         from quill.image import Image
         return Image(uuid, 
                      top_left[0], top_right[0], bottom_left[0], bottom_right[0], 
-                     constrain_aspect[0])
+                     constrain_aspect[0], self._blob_loader.get(uuid))
 
     def read_stroke(self):
         fp = self.fp
@@ -148,6 +148,34 @@ class QuillIndex(object):
             s += 'page ' + str(i) + ': ' + p + '\n'
         return s
 
+class QuillBlob(object):
+    """
+    Loader for contained binary objects (e.g. images)
+    """
+    def __init__(self, tar):
+        self._tar = tar
+
+    def get(self, uuid):
+        """
+        Return the object with given uuid
+        """
+        fileinfo = self._find_uuid(uuid)
+        f = self._tar.extractfile(fileinfo)
+        try:
+            data = f.read()
+            return data
+        except IOError:
+            raise QuillImporterError('failed to read binary object')
+        finally:
+            f.close()
+
+    def _find_uuid(self, uuid):
+        for f in self._tar.getmembers():
+            name = os.path.split(f.name)[-1]
+            if name.startswith(uuid):
+                return f
+        raise QuillImporterError('binary object missing from Quill file')
+
 
 
 class QuillImporter(ImporterBase):
@@ -161,7 +189,7 @@ class QuillImporter(ImporterBase):
         index_files = [ t.extractfile(f) for f in t.getmembers() 
                         if f.name.endswith('index.quill_data') ]
         if len(index_files) != 1:
-            raise QuillImporterError('Not a Quill file')
+            raise QuillImporterError('Not a Quill file, missing index')
         self._index = q = QuillIndex(index_files[0])
         notebook_dir = os.path.split(index_files[0].name)[0]
         self._page_filenames = [notebook_dir+'/page_'+page_uuid+'.quill_data'
@@ -189,7 +217,7 @@ class QuillImporter(ImporterBase):
         page_filename = self._page_filenames[n]
         with tarfile.open(self._filename, "r") as t:
             page_file = t.extractfile(page_filename)
-            qp = QuillPage(page_file, n)
+            qp = QuillPage(page_file, QuillBlob(t))
         from quill.page import Page
         return Page(n, qp.uuid, qp.aspect_ratio, qp.strokes, qp.lines, qp.images)
 

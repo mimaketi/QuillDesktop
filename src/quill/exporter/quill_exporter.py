@@ -11,6 +11,7 @@ EXAMPLES::
     
     >>> import os
     >>> os.path.getsize(tmp)
+    40960
     >>> import tarfile
     >>> info = [ (t.name, t.size) for t in tarfile.TarFile(tmp).getmembers() ]
     >>> info.sort()

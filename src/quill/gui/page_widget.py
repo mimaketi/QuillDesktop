@@ -26,6 +26,7 @@ class PageWidget(gtk.DrawingArea):
     def set_book(self, book):
         self._book = book
         self._page_number = 0
+        self._cache = {}
         self.queue_draw()
 
     def page_number(self):
@@ -35,12 +36,14 @@ class PageWidget(gtk.DrawingArea):
         if self._page_number == 0:
             return
         self._page_number -= 1
+        self._cache = {}
         self.queue_draw()
             
     def next_page(self):
         if self._page_number+1 == self._book.n_pages():
             return
         self._page_number += 1
+        self._cache = {}
         self.queue_draw()
 
     def draw(self, context, width, height):
@@ -49,7 +52,7 @@ class PageWidget(gtk.DrawingArea):
         context.fill()
         if self._book is None:
             return
-        output = CairoContext(context, width, height, background=True)
+        output = CairoContext(context, width, height, background=True, cache=self._cache)
         output.set_page_numbers(self._page_number)
         output.book(self._book)
 
