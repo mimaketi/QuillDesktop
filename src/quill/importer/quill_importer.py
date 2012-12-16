@@ -84,7 +84,7 @@ class QuillPage(object):
         version = struct.unpack(">i", fp.read(4))
         if version != (2,):
             raise QuillImporterError('wrong stroke version')
-        pen_color = struct.unpack(">i", fp.read(4))
+        pen_color = struct.unpack(">I", fp.read(4))
         red = (pen_color[0] >> 16) & 0xFF
         green = (pen_color[0] >> 8) & 0xFF
         blue = pen_color[0] & 0xFF
@@ -106,12 +106,14 @@ class QuillPage(object):
         version = struct.unpack(">i", fp.read(4))
         if version != (1,):
             raise QuillImporterError('wrong line version')
-        pen_color = struct.unpack(">i", fp.read(4))
+        pen_color = struct.unpack(">I", fp.read(4))
         red = (pen_color[0] >> 16) & 0xFF
         green = (pen_color[0] >> 8) & 0xFF
         blue = pen_color[0] & 0xFF
         thickness = struct.unpack(">i", fp.read(4))
         toolint = struct.unpack(">i", fp.read(4))
+        if toolint != (5,):
+            raise QuillImporterError('wrong line tool')
         xy = struct.unpack(">ffff", fp.read(4*4))
         from quill.line import Line
         return Line(thickness[0], red, green, blue, xy[0], xy[1], xy[2], xy[3])

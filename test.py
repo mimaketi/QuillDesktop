@@ -56,6 +56,8 @@ def test_import_export():
     doctest.testmod(quill.exporter.ps, globs={'sample_book': book})
     import quill.exporter.svg
     doctest.testmod(quill.exporter.svg, globs={'sample_book': book})
+    import quill.exporter.quill_exporter
+    doctest.testmod(quill.exporter.quill_exporter, globs={'sample_book': book})
     import quill.exporter.xournal
     doctest.testmod(quill.exporter.xournal, globs={'sample_book': book})
 

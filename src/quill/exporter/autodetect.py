@@ -19,5 +19,8 @@ def autodetect_exporter(filename):
     if f.endswith('.xoj'):
         from quill.exporter.xournal import Xournal
         return Xournal(filename)
+    if f.endswith('.quill'):
+        from quill.exporter.quill_exporter import QuillExporter
+        return QuillExporter(filename)
     raise QuillExporterError('cannot export '+filename)
 

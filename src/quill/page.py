@@ -80,7 +80,6 @@ class Page(object):
         """
         return self._uuid
         
-
     def aspect_ratio(self):
         """
         Return the aspect ratio.
