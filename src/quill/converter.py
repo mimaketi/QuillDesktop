@@ -9,8 +9,8 @@ EXAMPLES::
 
     >>> pdf = os.path.join(tmpdir, 'output.pdf')
     >>> QuillConverter(quill_file, pdf).run()
-    >>> os.path.getsize(pdf)
-    27411
+    >>> os.path.getsize(pdf)   > 27000
+    True
 
     >>> xoj = os.path.join(tmpdir, 'output.xoj')
     >>> QuillConverter(quill_file, xoj).run()
