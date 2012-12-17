@@ -22,6 +22,11 @@ EXAMPLES::
     >>> os.path.getsize(svg)
     1334634
 
+    >>> quill = os.path.join(tmpdir, 'output.quill')
+    >>> QuillConverter(quill_file, quill).run()
+    >>> os.path.getsize(quill)
+    122880
+
     >>> import shutil
     >>> shutil.rmtree(tmpdir)
 """

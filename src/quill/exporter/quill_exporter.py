@@ -11,11 +11,12 @@ EXAMPLES::
     
     >>> import os
     >>> os.path.getsize(tmp)
-    40960
+    122880
     >>> import tarfile
     >>> info = [ (t.name, t.size) for t in tarfile.TarFile(tmp).getmembers() ]
     >>> info.sort()
     >>> for name, size in info: print os.path.split(name)[-1], size
+    ce34de3c-daeb-4a81-8620-e170441946c1.jpg 82539
     index.quill_data 198
     page_5f55aaab-d1a6-4485-8c60-5bb48bea2319.quill_data 91
     page_9aa10c71-c872-4d2b-b97e-1845fd5a4cfc.quill_data 27794
@@ -57,10 +58,12 @@ class QuillExporter(ExporterBase2):
         self._index = ''
         self._page = None
         self._page_list = []
+        self._blobs = {}
 
     def end_export(self):
         index = self._pack_index()
         self._save_index(index)
+        self._save_blobs(self._blobs)
         self._tar.close()
 
     def _add(self, arcname, data):
@@ -80,6 +83,10 @@ class QuillExporter(ExporterBase2):
         self._add(name, data)
         self._page_list.append(page.uuid())
 
+    def _save_blobs(self, blobs):
+        for name, data in blobs.iteritems():
+            self._add(name, data)
+
     def _pack_uuid(self, uuid):
         r"""
         TESTS::
@@ -94,6 +101,7 @@ class QuillExporter(ExporterBase2):
         return struct.pack('<h', 36) + uuid
 
     def _pack_image(self, image):
+        self._blobs[image.uuid() + '.jpg'] = image.data()
         out = ''
         out += struct.pack('>i', 1)   # version
         out += self._pack_uuid(image.uuid())
@@ -108,7 +116,7 @@ class QuillExporter(ExporterBase2):
         out += struct.pack('>I', color)
         out += struct.pack('>i', line.thickness())
         out += struct.pack('>i', 5)
-        out += struct.pack('>ffff', line.x0(), line.x1(), line.y0(), line.y1())
+        out += struct.pack('>ffff', line.x0(), line.y0(), line.x1(), line.y1())
         return out
         
     def _pack_stroke(self, stroke):
