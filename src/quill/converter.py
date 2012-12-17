@@ -20,7 +20,7 @@ EXAMPLES::
     >>> svg = os.path.join(tmpdir, 'output.svg')
     >>> QuillConverter(quill_file, svg).run(page_number=0)
     >>> os.path.getsize(svg)
-    502138
+    1334634
 
     >>> import shutil
     >>> shutil.rmtree(tmpdir)

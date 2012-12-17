@@ -2,9 +2,8 @@
 Draw to a Cairo context
 """
 
-import gtk
 import cairo
-
+import gtk
 
 from quill.exporter.base2 import ExporterBase2
 
@@ -107,19 +106,25 @@ class CairoContext(ExporterBase2):
         loader.write(data)
         loader.close()
         pixbuf = loader.get_pixbuf()
+        surface = cairo.ImageSurface(
+            cairo.FORMAT_ARGB32, pixbuf.get_width(), pixbuf.get_height())
+        cr = gtk.gdk.CairoContext(cairo.Context(surface))
+        cr.set_source_pixbuf(pixbuf,0,0)
+        cr.paint()
+        cr.stroke()
         if self._cache is not None:
-            self._cache[image.uuid()] = pixbuf
-        return pixbuf
+            self._cache[image.uuid()] = surface
+        return surface
 
     def image(self, image):
         cr = self._context
-        pixbuf = self._get_pixbuf(image)
+        image_surface = self._get_image_surface(image)
         cr.save()
         cr.translate(image.x0(), image.y0())
-        w = (image.x1() - image.x0()) / pixbuf.get_width()
-        h = (image.y1() - image.y0()) / pixbuf.get_height()
+        w = (image.x1() - image.x0()) / image_surface.get_width()
+        h = (image.y1() - image.y0()) / image_surface.get_height()
         cr.scale(w, h)
-        cr.set_source_pixbuf(pixbuf,0,0)
+        cr.set_source_surface(image_surface,0,0)
         cr.paint()
         cr.stroke()
         cr.restore()
