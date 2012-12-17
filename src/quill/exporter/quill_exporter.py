@@ -17,7 +17,7 @@ EXAMPLES::
     >>> info.sort()
     >>> for name, size in info: print os.path.split(name)[-1], size
     ce34de3c-daeb-4a81-8620-e170441946c1.jpg 82539
-    index.quill_data 198
+    index.quill_data 214
     page_5f55aaab-d1a6-4485-8c60-5bb48bea2319.quill_data 91
     page_9aa10c71-c872-4d2b-b97e-1845fd5a4cfc.quill_data 27794
     page_b5786dad-3947-4846-a230-e084d2d9e2c0.quill_data 2255
@@ -94,11 +94,11 @@ class QuillExporter(ExporterBase2):
             >>> from quill.exporter.quill_exporter import QuillExporter
             >>> exp = QuillExporter('')
             >>> exp._pack_uuid('b5786dad-3947-4846-a230-e084d2d9e2c0')
-            '$\x00b5786dad-3947-4846-a230-e084d2d9e2c0'
+            '\x00$b5786dad-3947-4846-a230-e084d2d9e2c0'
         """
         uuid = str(uuid)
         assert len(uuid)==36
-        return struct.pack('<h', 36) + uuid
+        return struct.pack('>h', 36) + uuid
 
     def _pack_image(self, image):
         self._blobs[image.uuid() + '.jpg'] = image.data()
@@ -143,7 +143,7 @@ class QuillExporter(ExporterBase2):
             >>> exp = QuillExporter('')
             >>> exp.uuid('b5786dad-3947-4846-a230-e084d2d9e2c0')
             >>> exp._pack_page(sample_book.get_page(1))    # doctest: +ELLIPSIS
-            '\x00\x00\x00\x06$\x00b5786dad-3947-4846-a230-e084d2d9e...
+            '\x00\x00\x00\x06\x00$b5786dad-3947-4846-a230-e084d2d9e...
         """
         out = ''
         out += struct.pack('>i', 6)   # version
@@ -153,8 +153,8 @@ class QuillExporter(ExporterBase2):
         # TODO: save tags
         out += struct.pack('>i', 0)   # number of tags
         
-        out += struct.pack('>i', 0)    # dummy1
-        out += struct.pack('>i', 0)    # dummy2
+        out += struct.pack('>i', 0)   # tag dummy1
+        out += struct.pack('>i', 0)   # tag dummy2
         
         # TODO: preserve background
         out += struct.pack('>i', 0)    # paper type
@@ -191,4 +191,11 @@ class QuillExporter(ExporterBase2):
         out += struct.pack(">q", self._ctime)
         out += struct.pack(">q", self._mtime)
         out += self._pack_uuid(self._uuid)
+        
+        out += struct.pack('>i', 1)    # tagset version
+        # TODO: save tags
+        out += struct.pack('>i', 0)    # number of tags
+        out += struct.pack('>i', 0)    # tag dummy1
+        out += struct.pack('>i', 0)    # tag dummy2
+
         return out
