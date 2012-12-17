@@ -53,7 +53,7 @@ def launch():
                         default=None, type=int,
                         help='page number to export (default: all pages)')
     parser.add_argument('--gui', dest='gui', action='store_true',
-                        default=False, 
+                        default=True, 
                         help='start the gui')
     args = parser.parse_args()
     

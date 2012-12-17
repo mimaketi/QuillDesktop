@@ -2,6 +2,8 @@
 Automatically Detect Importer from File Extension
 """
 
+import os
+
 from quill.importer.base import QuillImporterError
 
 
@@ -13,5 +15,6 @@ def autodetect_importer(filename):
     if f.endswith('.xoj'):
         from quill.importer.xournal import Xournal
         return Xournal(filename)
-    raise QuillImporterError('cannot import '+filename)
+    ext = os.path.splitext(filename)[-1]
+    raise QuillImporterError('unknown import file extension (*' + ext + ')')
 

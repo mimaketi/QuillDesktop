@@ -12,6 +12,8 @@ import pkgutil
 from about import AboutDialog
 from page_widget import PageWidget
 
+from quill.importer.base import QuillImporterError
+from quill.exporter.base import QuillExporterError
 from quill.importer.autodetect import autodetect_importer
 from quill.exporter.autodetect import autodetect_exporter
 
@@ -29,6 +31,7 @@ class Application:
         self.window = builder.get_object('main')
         self.viewer = builder.get_object('main-page_viewer')
         self.status = builder.get_object('main-statusbar')
+        self.dlg_error = builder.get_object('error_dialog')
         self.dlg_about = builder.get_object('about')
         self.dlg_open  = builder.get_object('filechooser-open')
         self.dlg_save  = builder.get_object('filechooser-save')
@@ -37,6 +40,16 @@ class Application:
         if filename is not None:
             self.open_file(filename)
         self.window.show()
+
+    def error(self, msg, title='Error:'):
+        dlg = self.dlg_error
+        dlg.set_markup('<span size="large"><b>'+title+'</b></span>')
+        dlg.format_secondary_text(msg)
+        self.set_status(title + ' ' + msg)
+        dlg.run()
+
+    def on_error_dialog_response(self, widget, data=None):
+        self.dlg_error.hide()
 
     def log(self, msg):
         print 'Log:', msg
@@ -94,16 +107,24 @@ class Application:
             
     def open_file(self, filename):
         self._file = filename
-        imp = autodetect_importer(self._file)
-        book = self._book = imp.get_book()
+        try:
+            imp = autodetect_importer(self._file)
+            book = self._book = imp.get_book()
+        except QuillImporterError as e:
+            self.error(str(e), title='Error importing file:')
+            return
         self.viewer.set_book(book)
         self.set_status('Opened '+filename)
 
     def save_file(self, filename):
-        exp = autodetect_exporter(filename)
-        if not exp.is_multipage():
-            exp.set_page_numbers(self.viewer.page_number())
-        exp.book(self._book)
+        try:
+            exp = autodetect_exporter(filename)
+            if not exp.is_multipage():
+                exp.set_page_numbers(self.viewer.page_number())
+            exp.book(self._book)
+        except QuillExporterError as e:
+            self.error(str(e), title='Error exporting file:')
+            return
         self.set_status('Saved '+filename)
         
     

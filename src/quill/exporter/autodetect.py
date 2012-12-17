@@ -2,6 +2,8 @@
 Automatically Detect Exporter from File Extension
 """
 
+import os
+
 from quill.exporter.base import QuillExporterError
 
 
@@ -22,5 +24,6 @@ def autodetect_exporter(filename):
     if f.endswith('.quill'):
         from quill.exporter.quill_exporter import QuillExporter
         return QuillExporter(filename)
-    raise QuillExporterError('cannot export '+filename)
+    ext = os.path.splitext(filename)[-1]
+    raise QuillImporterError('unknown export file extension (*' + ext + ')')
 

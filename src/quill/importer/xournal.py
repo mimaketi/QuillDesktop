@@ -38,8 +38,12 @@ class Xournal(ImporterBase):
     def __init__(self, xournal_filename):
         self._filename = xournal_filename
         f = gzip.open(xournal_filename, 'rb')
-        self._tree = ET.ElementTree(file=f)
+        try:
+            self._tree = ET.ElementTree(file=f)
+        except IOError as e:
+            raise QuillImporterError(str(e))
         self._pages = [ page for page in self._tree.iter(tag='page') ]
+            
 
     def title(self):
         return self._tree.find('title').text
