@@ -13,6 +13,8 @@ EXAMPLES::
 """
 
 import gzip
+import math
+import base64
 
 from quill.exporter.base2 import ExporterBase2
 
@@ -62,7 +64,7 @@ class Xournal(ExporterBase2):
 
     def new_page(self, page):
         h = self._height = self.xournal_page_scale_factor
-        w = self._width = h * page.aspect_ratio()
+        w = self._width = int(h * page.aspect_ratio())
         f = self._fileobj
         if not self._first:
             f.write("</layer>"+"\n"+"</page>"+"\n\n")
@@ -74,7 +76,8 @@ class Xournal(ExporterBase2):
     def stroke(self, stroke):
         f = self._fileobj
         # Define RGB color for xournal; setting alpha=1 for now
-        color="#"+"{:02x}".format(stroke.red())+"{:02x}".format(stroke.green())+"{:02x}".format(stroke.blue())+"ff"
+        color = "#{0:02x}{1:02x}{2:02x}ff".format(
+            stroke.red(), stroke.green(), stroke.blue())
         f.write("<stroke tool=\"pen\" color=\"")
         f.write(color)
         f.write("\" width=\"")
@@ -95,7 +98,40 @@ class Xournal(ExporterBase2):
         f.write("</stroke>\n")
 
     def line(self, line):
-        pass
+	f = self._fileobj
+        color = "#{0:02x}{1:02x}{2:02x}ff".format(
+            line.red(), line.green(), line.blue())
+        f.write("<stroke tool=\"pen\" color=\"")
+        f.write(color)
+        f.write("\" width=\"")
+        f.write(str(self.xournal_pen_thickness_factor*line.thickness()))
+	f.write("\">\n")
+        x_start = line.x0()*self.xournal_page_scale_factor
+        y_start = line.y0()*self.xournal_page_scale_factor
+        x_end = line.x1()*self.xournal_page_scale_factor
+        y_end = line.y1()*self.xournal_page_scale_factor
+#        x_point = x_start
+#        y_point = y_start
+#        length = math.sqrt((x_end-x_start)**2+(y_end-y_start)**2)
+#        steps = int(length/3)
+#	dx = 3 * (x_end-x_start)/length
+#	dy = 3 * (y_end-y_start)/length
+#	for n in range(0,steps):
+#	    f.write(str(x_point)+" "+str(y_point+self.xournal_y_offset)+" ")
+#	    x_point = x_point + dx
+#	    y_point = y_point + dy
+        f.write(str(x_start)+" "+str(y_start+self.xournal_y_offset)+" "+str(x_end)
+                +" "+str(y_end+self.xournal_y_offset)+"\n</stroke>\n")
+#	f.write(str(x_end)+" "+str(y_end+self.xournal_y_offset)+"\n</stroke>\n ")
+
 
     def image(self, image):
-        pass
+        f = self._fileobj
+        image_base64 = base64.b64encode(image.data())
+        f.write("<image left=\""+str(self.xournal_page_scale_factor*image.x0())+"\" top=\""
+                +str(self.xournal_page_scale_factor*image.y0())+"\" right=\""+
+                str(self.xournal_page_scale_factor*image.x1())+"\" bottom=\""
+                +str(self.xournal_page_scale_factor*image.y1())+"\">")
+        f.write(image_base64)
+        f.write("</image>")
+        

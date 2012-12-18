@@ -36,6 +36,19 @@ class ImporterBase(object):
         """
         return 'Untitled Document'
 
+    def _random_uuid(self):
+        """
+        Return a random UUID.
+
+        :rtype: string
+
+        In Quill, most objects have a unique uuid associated. If the
+        import format does not do this, you should generate a random
+        uuid with this method.
+        """
+        import uuid
+        return str(uuid.uuid4())
+
     def uuid(self):
         """
         Return the UUID of the book.
@@ -50,8 +63,7 @@ class ImporterBase(object):
             >>> sample_importer.uuid()
             '1fd6a485-33ed-4a45-a5a1-e06e55fdca57'
         """
-        import uuid
-        return str(uuid.uuid4())
+        self._random_uuid()
 
     def mtime_millis(self):
         """

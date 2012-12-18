@@ -9,13 +9,16 @@ EXAMPLES::
     <quill.importer.xournal.Xournal object at 0x...>
     >>> book = x.get_book()
     >>> book.title()
-    'Xournal document - see http://math.mit.edu/~auroux/software/xournal/'
+    'Example_Notebook'
     >>> book.get_page(0)
     page number 0
 """
 
 import gzip
 import math
+import os
+import base64
+
 
 try:
     import xml.etree.cElementTree as ET
@@ -46,7 +49,10 @@ class Xournal(ImporterBase):
             
 
     def title(self):
-        return self._tree.find('title').text
+        # There is a <title> tag but its not the real title
+        # self._tree.find('title').text
+        return os.path.splitext(os.path.split(self._filename)[1])[0]
+
 
     def n_pages(self):
         return len(self._pages)
@@ -114,6 +120,15 @@ class Xournal(ImporterBase):
             points = zip(xy[::2], xy[1::2], [1.0]*(len(xy)/2))
         return Stroke(fountain_pen, thickness, red, green, blue, points)
 
+    def _parse_image(self, image):
+        left   = float(image.attrib['left'])   / self.xournal_page_scale_factor
+        right  = float(image.attrib['right'])  / self.xournal_page_scale_factor
+        top    = float(image.attrib['top'])    / self.xournal_page_scale_factor
+        bottom = float(image.attrib['bottom']) / self.xournal_page_scale_factor
+        image = base64.b64decode(image.text)
+        uuid = self._random_uuid()
+        return Image(uuid, left, top, bottom, right, True, image)
+
     def get_page(self, n):
         xoj_page = self._pages[n]
         strokes = []
@@ -125,8 +140,11 @@ class Xournal(ImporterBase):
             if isinstance(stroke, Line):
                 lines.append(stroke)
         images = []
+        for xoj_image in xoj_page.iter('image'):
+            image = self._parse_image(xoj_image)
+            images.append(image)
         aspect_ratio_A4 = 1.0/math.sqrt(2)
-        return Page(n, self.uuid(), aspect_ratio_A4, strokes, lines, images)
+        return Page(n, self._random_uuid(), aspect_ratio_A4, strokes, lines, images)
 
 
 

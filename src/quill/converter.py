@@ -15,7 +15,7 @@ EXAMPLES::
     >>> xoj = os.path.join(tmpdir, 'output.xoj')
     >>> QuillConverter(quill_file, xoj).run()
     >>> os.path.getsize(xoj)
-    31787
+    115959
 
     >>> svg = os.path.join(tmpdir, 'output.svg')
     >>> QuillConverter(quill_file, svg).run(page_number=0)
