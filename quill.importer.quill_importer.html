@@ -28,7 +28,7 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Quill Desktop 0.1 documentation" href="index.html" />
     <link rel="up" title="Programmers Guide" href="code.html" />
-    <link rel="next" title="Base Class for Exporters" href="quill.exporter.base.html" />
+    <link rel="next" title="Importer for Xournal Files" href="quill.importer.xournal.html" />
     <link rel="prev" title="Base Class for Importers" href="quill.importer.base.html" /> 
   </head>
   <body>
@@ -42,7 +42,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="quill.exporter.base.html" title="Base Class for Exporters"
+          <a href="quill.importer.xournal.html" title="Importer for Xournal Files"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="quill.importer.base.html" title="Base Class for Importers"
@@ -60,6 +60,19 @@
   <div class="section" id="module-quill.importer.quill_importer">
 <span id="importer-for-quill-archives"></span><h1>Importer for Quill Archives<a class="headerlink" href="#module-quill.importer.quill_importer" title="Permalink to this headline">¶</a></h1>
 <p>Importer for Quill Archives</p>
+<dl class="class">
+<dt id="quill.importer.quill_importer.QuillBlob">
+<em class="property">class </em><tt class="descclassname">quill.importer.quill_importer.</tt><tt class="descname">QuillBlob</tt><big>(</big><em>tar</em><big>)</big><a class="headerlink" href="#quill.importer.quill_importer.QuillBlob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Loader for contained binary objects (e.g. images)</p>
+<dl class="method">
+<dt id="quill.importer.quill_importer.QuillBlob.get">
+<tt class="descname">get</tt><big>(</big><em>uuid</em><big>)</big><a class="headerlink" href="#quill.importer.quill_importer.QuillBlob.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the object with given uuid</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="class">
 <dt id="quill.importer.quill_importer.QuillImporter">
 <em class="property">class </em><tt class="descclassname">quill.importer.quill_importer.</tt><tt class="descname">QuillImporter</tt><big>(</big><em>quill_filename</em><big>)</big><a class="reference internal" href="_modules/quill/importer/quill_importer.html#QuillImporter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.quill_importer.QuillImporter" title="Permalink to this definition">¶</a></dt>
@@ -105,7 +118,7 @@
 
 <dl class="class">
 <dt id="quill.importer.quill_importer.QuillPage">
-<em class="property">class </em><tt class="descclassname">quill.importer.quill_importer.</tt><tt class="descname">QuillPage</tt><big>(</big><em>page_file=None</em>, <em>page_number=1</em><big>)</big><a class="reference internal" href="_modules/quill/importer/quill_importer.html#QuillPage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.quill_importer.QuillPage" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">quill.importer.quill_importer.</tt><tt class="descname">QuillPage</tt><big>(</big><em>page_file</em>, <em>blob_loader</em><big>)</big><a class="reference internal" href="_modules/quill/importer/quill_importer.html#QuillPage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.importer.quill_importer.QuillPage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <dl class="attribute">
 <dt id="quill.importer.quill_importer.QuillPage.pen_scale_factor">
@@ -141,8 +154,8 @@
   <p class="topless"><a href="quill.importer.base.html"
                         title="previous chapter">Base Class for Importers</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="quill.exporter.base.html"
-                        title="next chapter">Base Class for Exporters</a></p>
+  <p class="topless"><a href="quill.importer.xournal.html"
+                        title="next chapter">Importer for Xournal Files</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/quill.importer.quill_importer.txt"
@@ -175,7 +188,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="quill.exporter.base.html" title="Base Class for Exporters"
+          <a href="quill.importer.xournal.html" title="Importer for Xournal Files"
              >next</a> |</li>
         <li class="right" >
           <a href="quill.importer.base.html" title="Base Class for Importers"

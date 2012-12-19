@@ -28,7 +28,7 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Quill Desktop 0.1 documentation" href="index.html" />
     <link rel="up" title="Programmers Guide" href="code.html" />
-    <link rel="next" title="Base Class for Importers" href="quill.importer.base.html" />
+    <link rel="next" title="Straight Line" href="quill.line.html" />
     <link rel="prev" title="Pen Stroke" href="quill.stroke.html" /> 
   </head>
   <body>
@@ -42,7 +42,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="quill.importer.base.html" title="Base Class for Importers"
+          <a href="quill.line.html" title="Straight Line"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="quill.stroke.html" title="Pen Stroke"
@@ -62,15 +62,148 @@
 <p>Image</p>
 <p>This module is the data model for an image on a page</p>
 <p>EXAMPLES:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span>  
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span>
 <span class="go">image at (0.13,0.605):(0.455,0.739)</span>
 </pre></div>
 </div>
 <dl class="class">
 <dt id="quill.image.Image">
-<em class="property">class </em><tt class="descclassname">quill.image.</tt><tt class="descname">Image</tt><big>(</big><em>uuid</em>, <em>x0</em>, <em>x1</em>, <em>y0</em>, <em>y1</em>, <em>constrain_aspect</em><big>)</big><a class="reference internal" href="_modules/quill/image.html#Image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.image.Image" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">quill.image.</tt><tt class="descname">Image</tt><big>(</big><em>uuid</em>, <em>x0</em>, <em>x1</em>, <em>y0</em>, <em>y1</em>, <em>constrain_aspect</em>, <em>jpg_data</em><big>)</big><a class="reference internal" href="_modules/quill/image.html#Image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quill.image.Image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">quill.graphics_object.GraphicsObject</span></tt></p>
 <p>Embedded image on a page.</p>
+<dl class="method">
+<dt id="quill.image.Image.constrain_aspect">
+<tt class="descname">constrain_aspect</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.image.Image.constrain_aspect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the aspect ratio should be constrained when resizing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span><span class="o">.</span><span class="n">constrain_aspect</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.image.Image.data">
+<tt class="descname">data</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.image.Image.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the image data (jpg).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>    
+<span class="go">&#39;\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.image.Image.uuid">
+<tt class="descname">uuid</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.image.Image.uuid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the image uuid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span><span class="o">.</span><span class="n">uuid</span><span class="p">()</span>
+<span class="go">&#39;ce34de3c-daeb-4a81-8620-e170441946c1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.image.Image.x0">
+<tt class="descname">x0</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.image.Image.x0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the minimum x-coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span><span class="o">.</span><span class="n">x0</span><span class="p">()</span>
+<span class="go">0.12979288399219513</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.image.Image.x1">
+<tt class="descname">x1</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.image.Image.x1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum x-coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span><span class="o">.</span><span class="n">x1</span><span class="p">()</span>
+<span class="go">0.4552972912788391</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.image.Image.y0">
+<tt class="descname">y0</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.image.Image.y0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the minimum y-coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span><span class="o">.</span><span class="n">y1</span><span class="p">()</span>
+<span class="go">0.7390127182006836</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quill.image.Image.y1">
+<tt class="descname">y1</tt><big>(</big><big>)</big><a class="headerlink" href="#quill.image.Image.y1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the maximum y-coordinate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sample_image</span><span class="o">.</span><span class="n">y1</span><span class="p">()</span>
+<span class="go">0.7390127182006836</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -85,8 +218,8 @@
   <p class="topless"><a href="quill.stroke.html"
                         title="previous chapter">Pen Stroke</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="quill.importer.base.html"
-                        title="next chapter">Base Class for Importers</a></p>
+  <p class="topless"><a href="quill.line.html"
+                        title="next chapter">Straight Line</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/quill.image.txt"
@@ -119,7 +252,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="quill.importer.base.html" title="Base Class for Importers"
+          <a href="quill.line.html" title="Straight Line"
              >next</a> |</li>
         <li class="right" >
           <a href="quill.stroke.html" title="Pen Stroke"

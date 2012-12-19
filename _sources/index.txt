@@ -45,12 +45,18 @@ EXAMPLES::
 
     [user@localhost]$ quill input.quill output.pdf
 
+Possible input file formats are:
+
+* ``input.xoj``: Xournal (http://xournal.sourceforge.net)
+* ``input.quill``: Quill's own file format
+
 Possible output file formats are:
 
 * ``output.pdf``: portable document format (PDF)
 * ``output.ps``: Postscript (PS)
 * ``output.svg``: scalable vector graphics (SVG)
-* ``output.xoj``: Xournal (http://xournal.sourceforge.net)
+* ``output.xoj``: Xournal's file format
+* ``output.quill``: Quill's own file format
 
 
 Programmers Guide
