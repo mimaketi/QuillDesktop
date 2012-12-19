@@ -63,7 +63,7 @@ class ImporterBase(object):
             >>> sample_importer.uuid()
             '1fd6a485-33ed-4a45-a5a1-e06e55fdca57'
         """
-        self._random_uuid()
+        return self._random_uuid()
 
     def mtime_millis(self):
         """

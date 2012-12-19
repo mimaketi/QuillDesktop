@@ -7,6 +7,7 @@ EXAMPLES::
     >>> from tempfile import TemporaryFile
     >>> tmp = TemporaryFile(suffix='pdf')
     >>> Pdf(tmp).book(sample_book)
+    >>> Pdf(tmp).book(sample_book_xoj)
 """
 
 import cairo

@@ -143,7 +143,7 @@ class QuillExporter(ExporterBase2):
             >>> exp = QuillExporter('')
             >>> exp.uuid('b5786dad-3947-4846-a230-e084d2d9e2c0')
             >>> exp._pack_page(sample_book.get_page(1))    # doctest: +ELLIPSIS
-            '\x00\x00\x00\x06\x00$b5786dad-3947-4846-a230-e084d2d9e...
+            '\x00\x00\x00\x06\x00$...
         """
         out = ''
         out += struct.pack('>i', 6)   # version

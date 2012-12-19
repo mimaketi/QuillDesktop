@@ -49,6 +49,49 @@ EXAMPLES::
     Draw pen stroke with 54 points
     New page, aspect ratio 0.707
     Ending export
+
+    >>> ExporterBase2().book(sample_book_xoj)    # doctest: +ELLIPSIS
+    Beginning export
+    Title is set to Example_Notebook
+    UUID is set to ...
+    Creation time set to ...
+    Last modification time set to ...
+    New page, aspect ratio 0.707
+    Draw image at (0.13,0.605):(0.455,0.739)
+    Draw line from (0.175,0.532) to (0.629,0.442)
+    Draw line from (0.169,0.433) to (0.632,0.528)
+    Draw pen stroke with 40 points
+    Draw pen stroke with 8 points
+    Draw pen stroke with 59 points
+    Draw pen stroke with 31 points
+    Draw pen stroke with 44 points
+    Draw pen stroke with 36 points
+    Draw pen stroke with 22 points
+    Draw pen stroke with 9 points
+    Draw pen stroke with 6 points
+    Draw pen stroke with 18 points
+    Draw pen stroke with 21 points
+    ...
+    Draw pen stroke with 17 points
+    Draw pen stroke with 14 points
+    Draw pen stroke with 34 points
+    Draw pen stroke with 11 points
+    Draw pen stroke with 18 points
+    Draw pen stroke with 11 points
+    Draw pen stroke with 11 points
+    Draw pen stroke with 4 points
+    Draw pen stroke with 28 points
+    Draw pen stroke with 32 points
+    Draw pen stroke with 29 points
+    Draw pen stroke with 21 points
+    New page, aspect ratio 0.707
+    Draw pen stroke with 12 points
+    Draw pen stroke with 30 points
+    Draw pen stroke with 26 points
+    Draw pen stroke with 50 points
+    Draw pen stroke with 54 points
+    New page, aspect ratio 0.707
+    Ending export
 """
 
 from base import ExporterBase

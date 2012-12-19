@@ -7,6 +7,7 @@ EXAMPLES::
     >>> from tempfile import TemporaryFile
     >>> tmp = TemporaryFile(suffix='svg')
     >>> Svg(tmp).book(sample_book)
+    >>> Svg(tmp).book(sample_book_xoj)
 """
 
 import cairo

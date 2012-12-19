@@ -127,7 +127,7 @@ class Xournal(ImporterBase):
         bottom = float(image.attrib['bottom']) / self.xournal_page_scale_factor
         image = base64.b64decode(image.text)
         uuid = self._random_uuid()
-        return Image(uuid, left, top, bottom, right, True, image)
+        return Image(uuid, left, right, top, bottom, True, image)
 
     def get_page(self, n):
         xoj_page = self._pages[n]
