@@ -18,15 +18,7 @@ TODO
 ----
 
 * Better error handling
-
 * Incorporate tags into SVG metadata
-
-* Deal with aspect ratios
-
-* Deal with line art
-
-* Deal with images
-
 * Deal with earlier quill formats
 
 
@@ -36,7 +28,7 @@ Authors
 * Volker Braun: Framework, GUI, more export file formats.
 * Nicholas A. Knouf (http://zeitkunst.org): Initial quill to SVG
   converter.
-* Yuri Shirman: Xournal export
+* Yuri Shirman: Xournal import/export
 
 License
 -------
