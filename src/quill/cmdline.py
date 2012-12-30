@@ -49,7 +49,7 @@ def launch():
                         help='input file name', default=None, nargs='?')
     parser.add_argument('output',
                         help='output file name', default=None, nargs='?')
-    parser.add_argument('-p, --page', dest='page', action='store',
+    parser.add_argument('-p', '--page', dest='page', action='store',
                         default=None, type=int,
                         help='page number to export (default: all pages)')
     parser.add_argument('--gui', dest='gui', action='store_true',
