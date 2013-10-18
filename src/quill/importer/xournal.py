@@ -143,6 +143,9 @@ class Xournal(ImporterBase):
         for xoj_image in xoj_page.iter('image'):
             image = self._parse_image(xoj_image)
             images.append(image)
+        for xoj_tex in xoj_page.iter('teximage'):
+            image = self._parse_image(xoj_tex)
+            images.append(image)
         aspect_ratio_A4 = 1.0/math.sqrt(2)
         return Page(n, self._random_uuid(), aspect_ratio_A4, strokes, lines, images)
 
