@@ -6,7 +6,7 @@ import os
 try:
     import quill
 except ImportError:
-    app_home_dir = os.path.dirname(sys.argv[0])
+    app_home_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
     sys.path.append(os.path.join(app_home_dir, 'src'))
     import quill
 
