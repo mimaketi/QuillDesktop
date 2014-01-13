@@ -60,6 +60,7 @@ def launch():
     if args.input is not None and args.output is not None:
         from quill.converter import QuillConverter
         QuillConverter(args.input, args.output).run(args.page)
+        return
 
     if args.gui:
         launch_gui(args.input)
