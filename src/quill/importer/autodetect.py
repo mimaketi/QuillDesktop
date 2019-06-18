@@ -9,7 +9,7 @@ from quill.importer.base import QuillImporterError
 
 def autodetect_importer(filename):
     f = filename.lower()
-    if f.endswith('.quill'):
+    if f.endswith('.note'):
         from quill.importer.quill_importer import QuillImporter
         return QuillImporter(filename)
     if f.endswith('.xoj'):

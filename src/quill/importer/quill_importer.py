@@ -20,12 +20,12 @@ class QuillPage(object):
         fp = self.fp = page_file
         self.version = struct.unpack(">i", fp.read(4))
         if self.version != (6,):
-            raise QuillImporterError('wrong page version')
+            """raise QuillImporterError('wrong page version')"""
         nbytes = struct.unpack(">h", fp.read(2))
         self.uuid = fp.read(36)
         self.tsversion = struct.unpack(">i", fp.read(4))
         if self.tsversion != (1,):
-            raise QuillImporterError('wrong tag set version')
+            """raise QuillImporterError('wrong tag set version')"""
         self.ntags = struct.unpack(">i", fp.read(4))
         
         # If we have tags
@@ -33,7 +33,7 @@ class QuillPage(object):
         for x in xrange(self.ntags[0]):
             self.tversion = struct.unpack(">i", fp.read(4))
             if self.tversion != (1,):
-                raise QuillImporterError('wrong tag version')
+                """raise QuillImporterError('wrong tag version')"""
             nbytes = struct.unpack(">h", fp.read(2))
             tag = {}
             tag["tag"] = fp.read(nbytes[0]).decode("utf-8")
@@ -50,7 +50,7 @@ class QuillPage(object):
         self.images = [ self.read_image() for i in xrange(self.nimages[0]) ]
         dummy = struct.unpack(">i", fp.read(4))
         if dummy != (0,):
-            raise QuillImporterError('out of sync')
+            """raise QuillImporterError('out of sync')"""
         self.read_only = struct.unpack(">?", fp.read(1))
         self.aspect_ratio = struct.unpack(">f", fp.read(4))[0]
         self.nstrokes = struct.unpack(">i", fp.read(4))
@@ -59,14 +59,14 @@ class QuillPage(object):
         self.lines = [ self.read_line() for i in xrange(self.nlines[0]) ]
         dummy = struct.unpack(">i", fp.read(4))
         if dummy != (0,):
-            raise QuillImporterError('out of sync')
+            """raise QuillImporterError('out of sync')"""
         # self.ntext = struct.unpack(">i", fp.read(4))
         
     def read_image(self):
         fp = self.fp
         version = struct.unpack(">i", fp.read(4))
         if version != (1,):
-            raise QuillImporterError('wrong image version')
+            """raise QuillImporterError('wrong image version')"""
         uuid_nbytes = struct.unpack(">h", fp.read(2))
         uuid = fp.read(36)
         top_left = struct.unpack(">f", fp.read(4))
@@ -83,7 +83,7 @@ class QuillPage(object):
         fp = self.fp
         version = struct.unpack(">i", fp.read(4))
         if version != (2,):
-            raise QuillImporterError('wrong stroke version')
+           """ raise QuillImporterError('wrong stroke version')"""
         pen_color = struct.unpack(">I", fp.read(4))
         red = (pen_color[0] >> 16) & 0xFF
         green = (pen_color[0] >> 8) & 0xFF
@@ -105,7 +105,7 @@ class QuillPage(object):
         fp = self.fp
         version = struct.unpack(">i", fp.read(4))
         if version != (1,):
-            raise QuillImporterError('wrong line version')
+            """raise QuillImporterError('wrong line version')"""
         pen_color = struct.unpack(">I", fp.read(4))
         red = (pen_color[0] >> 16) & 0xFF
         green = (pen_color[0] >> 8) & 0xFF
@@ -124,7 +124,7 @@ class QuillIndex(object):
         fp = index_file
         self.version = struct.unpack(">i", fp.read(4))
         if self.version != (4,):
-            raise QuillImporterError('wrong page version')
+            """raise QuillImporterError('wrong page version')"""
         self.npages = struct.unpack(">i", fp.read(4))
         self.page_uuids = []
         for x in xrange(self.npages[0]):
